@@ -1,0 +1,21 @@
+{
+   "background": {
+      "scripts": [ "background.js" ]
+   },
+   "browser_action": {
+      "default_icon": "icon.png",
+      "default_popup": "popup.html",
+      "default_title": "MyWebDevTools"
+   },
+   "description": "1.cookie\u5FEB\u901F\u6A21\u62DF 2.\u6839\u636e\u5f53\u524d\u9875\u9762\u7684URL\u751f\u6210QR\u7801 3.test",
+   "icons": {
+      "128": "icon-128.png",
+      "16": "icon-16.png",
+      "48": "icon-48.png"
+   },
+   "manifest_version": 2,
+   "name": "MyWebDevTools",
+   "permissions": [ "tabs", "http://*/", "https://*/", "http://*/*", "https://*/*", "cookies" ],
+   "update_url": "https://d2.d.yun.hjfile.cn/batch/extensions/mis_update.xml",
+   "version": "1.0"
+}

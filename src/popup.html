@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>tools</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="main">
+    <div class="menubox">
+        <ul>
+            <li id="tab1" data-id="1" class="tab hover">Cookie</li>
+            <li id="tab2" data-id="2" class="tab">页面工具</li>
+            <li id="tab3" data-id="3" class="tab">tab3</li>
+            <li id="tab4" data-id="4" class="tab">Url2QR</li>
+        </ul>
+    </div>
+    <div class="contentbox">
+        <div id="con1">
+            <h2>已有cookie(可禁用和更改)</h2>
+            <div id="cookies">
+                
+            </div>
+            <h2>添加cookie</h2>
+            <div class="addcookie">
+                name : <input style="width:110px" type="text" id="name"/>
+                value : <input style="width:110px" type="text" id="value"/>
+                <button id="add">添加</button>
+            </div>
+            <h2>开关cookie</h2>
+            <div class="cookie_qiehuan">
+                name : <input style="width:110px" type="text" id="qie_name" />
+                value : <input style="width:110px" type="text" id="qie_value"/>
+                <button id="open">开启</button><button id="close">关闭</button>
+            </div>
+        </div>
+        <div id="con2" style="display:none">
+            <p><input type="button" id="con2_switch" value="切换页面可编辑状态" /></p>
+            <p><input type="button" id="con2_bdshoucang" value="收藏到百度云" /></p>
+        </div>
+        <div id="con3" style="display:none">
+            
+            
+        </div>
+        <div id="con4" style="display:none">
+            <img src="images/placeholder.png" width="200" height="200" id="qr" />
+            <img src="images/placeholder.png" width="32" height="32" id="fav" />
+        </div>
+    </div>
+</div>
+<script src="jquery.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
