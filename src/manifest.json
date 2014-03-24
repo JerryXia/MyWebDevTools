@@ -16,6 +16,6 @@
    "manifest_version": 2,
    "name": "MyWebDevTools",
    "permissions": [ "tabs", "http://*/", "https://*/", "http://*/*", "https://*/*", "cookies" ],
-   "update_url": "https://d2.d.yun.hjfile.cn/batch/extensions/mis_update.xml",
-   "version": "1.0"
+   "update_url": "https://raw.github.com/JerryXia/MyWebDevTools/master/plugin_update.xml",
+   "version": "1.0.0"
 }
