@@ -17,5 +17,5 @@
    "name": "MyWebDevTools",
    "permissions": [ "tabs", "http://*/", "https://*/", "http://*/*", "https://*/*", "cookies" ],
    "update_url": "https://raw.github.com/JerryXia/MyWebDevTools/master/plugin_update.xml",
-   "version": "1.0.0"
+   "version": "1.1.0"
 }
