@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>tools</title>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <div id="main">
@@ -37,6 +37,23 @@
         <div id="con2" style="display:none">
             <p><input type="button" id="con2_switch" value="切换页面可编辑状态" /></p>
             <p><input type="button" id="con2_bdshoucang" value="收藏到百度云" /></p>
+
+            <div class="con2_container">
+                默认主题：<strong id="current-theme">Clearness</strong>
+                <hr size="1">
+                设置主题：<select id="theme">
+                    <optgroup label="Default theme">
+                        <option>Clearness</option>
+                        <option>ClearnessDark</option>
+                        <option>Github</option>
+                        <option>TopMarks</option>
+                    </optgroup>
+                </select>
+                <hr size="1">
+                <button id="con2_btn-export">Export To HTML</button>
+                <hr size="1">
+                <a href="options.html" target="_blank" id="link-options">Options</a>
+            </div>
         </div>
         <div id="con3" style="display:none">
             <img src="images/placeholder.png" width="200" height="200" id="qr" />
@@ -49,7 +66,7 @@
         </div>
     </div>
 </div>
-<script src="jquery.js"></script>
+<script src="js/jquery.js"></script>
 <script src="popup.js"></script>
 </body>
 </html>

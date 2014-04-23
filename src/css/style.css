@@ -10,7 +10,7 @@ body{
 }
 .menubox {
   width:100%;
-  background:url('images/tabbar.gif');
+  background:url('../images/tabbar.gif');
   height:28px;
   line-height:28px;
 }
@@ -34,7 +34,7 @@ body{
   border-left:1px solid #A8C29F;
   border-top:1px solid #A8C29F;
   border-right:1px solid #A8C29F;
-  background:url('images/tabitem.gif');
+  background:url('../images/tabitem.gif');
   color:#739242;
   font-weight:bold;
   height:27px;
@@ -57,7 +57,9 @@ div.cookies{
 div.cookies a{
   margin-left:10px;
 }
-
+div.con2_container {
+  margin: 4px .5em;
+}
 
 
 #con3 {

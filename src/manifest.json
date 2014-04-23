@@ -1,21 +1,68 @@
 {
-   "background": {
-      "scripts": [ "background.js" ]
-   },
-   "browser_action": {
+  "browser_action": {
       "default_icon": "icon.png",
       "default_popup": "popup.html",
       "default_title": "MyWebDevTools"
-   },
-   "description": "1.cookie\u5FEB\u901F\u6A21\u62DF 2.tools 3.\u6839\u636e\u5f53\u524d\u9875\u9762\u7684URL\u751f\u6210QR\u7801 4.get new films",
-   "icons": {
-      "128": "icon-128.png",
-      "16": "icon-16.png",
-      "48": "icon-48.png"
-   },
-   "manifest_version": 2,
-   "name": "MyWebDevTools",
-   "permissions": [ "tabs", "http://*/", "https://*/", "http://*/*", "https://*/*", "cookies" ],
-   "update_url": "https://raw.github.com/JerryXia/MyWebDevTools/master/plugin_update.xml",
-   "version": "1.1.1"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*.md*",
+        "http://*/*.text",
+        "http://*/*.markdown*",
+        "http://*/*.mdown*",
+        "http://*/*.txt*",
+        "http://*/*.mkd*",
+        "https://*/*.md*",
+        "https://*/*.text",
+        "https://*/*.markdown*",
+        "https://*/*.mdown*",
+        "https://*/*.txt*",
+        "https://*/*.mkd*",
+        "file://*/*.md",
+        "file://*/*.markdown",
+        "file://*/*.mdown",
+        "file://*/*.text",
+        "file://*/*.txt",
+        "file://*/*.mkd"
+      ],
+      "js": [
+        "js/jquery.js",
+        "markdown/js/marked.js",
+        "markdown/js/highlight.js",
+        "markdown/js/markdownify.js"
+      ]
+    }
+  ],
+  "description": "1.cookie\u5FEB\u901F\u6A21\u62DF 2.tools 3.\u6839\u636e\u5f53\u524d\u9875\u9762\u7684URL\u751f\u6210QR\u7801 4.get new films",
+  "icons": {
+    "128": "icon-128.png",
+    "16": "icon-16.png",
+    "48": "icon-48.png"
+  },
+  "manifest_version": 2,
+  "name": "MyWebDevTools",
+  "options_page": "options.html",
+  "permissions": [
+    "cookies",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "update_url": "https://raw.github.com/JerryXia/MyWebDevTools/master/plugin_update.xml",
+  "version": "1.2.0",
+  "web_accessible_resources": [
+    "markdown/css/bootstrap.min.css",
+    "markdown/theme/Clearness.css",
+    "markdown/theme/ClearnessDark.css",
+    "markdown/theme/Github.css",
+    "markdown/theme/TopMarks.css",
+    "markdown/theme/i/cal.png",
+    "markdown/theme/i/compass.png",
+    "markdown/theme/i/doc.png",
+    "markdown/theme/i/email.png",
+    "markdown/theme/i/folder.png",
+    "popup.js",
+    "options.js"
+  ]
 }
