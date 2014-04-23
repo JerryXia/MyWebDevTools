@@ -50,7 +50,7 @@
     "<all_urls>"
   ],
   "update_url": "https://raw.github.com/JerryXia/MyWebDevTools/master/plugin_update.xml",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "web_accessible_resources": [
     "markdown/css/bootstrap.min.css",
     "markdown/theme/Clearness.css",

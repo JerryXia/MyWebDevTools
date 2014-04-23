@@ -54,7 +54,7 @@
     }
 
     function getThemeCss(theme) {
-        return chrome.extension.getURL('theme/' + theme + '.css');
+        return chrome.extension.getURL('markdown/theme/' + theme + '.css');
     }
 
     function setTheme(theme) {
