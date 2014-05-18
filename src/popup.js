@@ -370,6 +370,12 @@ var dylist = [
     siteurl: "http://www.tbmovie.com",
     alias: "tbmovie",
     charset: "utf-8"
+  },
+  {
+    sitename: "龙部落",
+    siteurl: "http://www.xuandy.com",
+    alias: "xuandy",
+    charset: "utf-8"
   }
 ];
 
