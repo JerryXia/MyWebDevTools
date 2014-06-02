@@ -7,6 +7,9 @@ $.fn.coffee = function(obj){
 }
 
 /*  Global  */
+var nowDateTime = new Date();
+$('p strong.showtime').text(nowDateTime.toLocaleDateString() + ' ' + nowDateTime.toTimeString());
+
 $(function(){
   $('#main').coffee({
     click: {
