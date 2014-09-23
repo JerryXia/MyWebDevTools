@@ -10,6 +10,11 @@ $.fn.coffee = function(obj){
 var nowDateTime = new Date();
 $('p strong.showtime').text(nowDateTime.toLocaleDateString() + ' ' + nowDateTime.toTimeString());
 
+//Cache Killer
+if (localStorage["turnOnByDefault"] === "on") {
+    document.getElementById("enableOnStartElement").checked = true;
+}
+
 $(function(){
   $('#main').coffee({
     click: {
@@ -60,6 +65,13 @@ $(function(){
         default:
           break;
         }
+      },
+      '#enableOnStartElement': function(){
+        var newValue = "off";
+        if (document.getElementById("enableOnStartElement").checked) {
+            newValue = "on";
+        }
+        localStorage["turnOnByDefault"] = newValue;
       },
       '#con2_switch': function(){
         chrome.tabs.executeScript({

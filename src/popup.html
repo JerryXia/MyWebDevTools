@@ -9,8 +9,8 @@
 <div id="main">
     <div class="menubox">
         <ul>
-            <li id="tab1" data-id="1" class="tab hover">Cookie</li>
-            <li id="tab2" data-id="2" class="tab">页面工具</li>
+            <li id="tab1" data-id="1" class="tab hover">Dev Tools</li>
+            <li id="tab2" data-id="2" class="tab">Page Tools</li>
             <li id="tab3" data-id="3" class="tab">Url2QR</li>
             <li id="tab4" data-id="4" class="tab">Custom</li>
         </ul>
@@ -18,25 +18,11 @@
     <div class="contentbox">
         <p><strong>当前时间：</strong><strong class="showtime"></strong></p>
         <div id="con1">
-            <h2>已有cookie(可禁用和更改)</h2>
-            <div id="cookies">
-                
-            </div>
-            <h2>添加cookie</h2>
-            <div class="addcookie">
-                name : <input style="width:110px" type="text" id="name"/>
-                value : <input style="width:110px" type="text" id="value"/>
-                <button id="add">添加</button>
-            </div>
-            <h2>开关cookie</h2>
-            <div class="cookie_qiehuan">
-                name : <input style="width:110px" type="text" id="qie_name" />
-                value : <input style="width:110px" type="text" id="qie_value"/>
-                <button id="open">开启</button><button id="close">关闭</button>
-            </div>
+            <p><input type="button" id="con2_switch" value="切换网页的可编辑状态" /></p>
+            <p>Cache Killer: <input type="checkbox" name="enableOnStartElement" id="enableOnStartElement" /></p>
+            <br /><br /><br />
         </div>
         <div id="con2" style="display:none">
-            <p><input type="button" id="con2_switch" value="切换页面可编辑状态" /></p>
             <p><input type="button" id="con2_bdshoucang" value="收藏到百度云" /></p>
 
             <div class="con2_container">

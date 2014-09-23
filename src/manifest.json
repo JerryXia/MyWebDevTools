@@ -1,8 +1,12 @@
 {
+  "background": {
+      "scripts": [ "background.js" ]
+   },
   "browser_action": {
       "default_icon": "icon.png",
       "default_popup": "popup.html",
-      "default_title": "MyWebDevTools"
+      "default_title": "MyWebDevTools",
+      "name": "MyWebDevTools"
   },
   "content_scripts": [
     {
@@ -34,23 +38,28 @@
       ]
     }
   ],
-  "description": "1.cookie\u5FEB\u901F\u6A21\u62DF 2.tools 3.\u6839\u636e\u5f53\u524d\u9875\u9762\u7684URL\u751f\u6210QR\u7801 4.get new films",
+  "description": "1.DevTools 2.PageTools 3.\u6839\u636e\u5f53\u524d\u9875\u9762\u7684URL\u751f\u6210QR\u7801 4.get new films",
   "icons": {
     "128": "icon-128.png",
     "16": "icon-16.png",
     "48": "icon-48.png"
   },
+  "incognito": "split",
   "manifest_version": 2,
+  "minimum_chrome_version": "19.0.1028.0",
   "name": "MyWebDevTools",
+  "offline_enabled": false,
   "options_page": "options.html",
   "permissions": [
+    "browsingData",
     "cookies",
     "storage",
     "tabs",
+    "webRequest",
     "<all_urls>"
   ],
-  "update_url": "https://raw.github.com/JerryXia/MyWebDevTools/master/plugin_update.xml",
-  "version": "1.2.3",
+  "update_url": "https://raw.githubusercontent.com/JerryXia/MyWebDevTools/master/plugin_update.xml",
+  "version": "1.3.1",
   "web_accessible_resources": [
     "markdown/css/bootstrap.min.css",
     "markdown/theme/Clearness.css",
@@ -62,6 +71,7 @@
     "markdown/theme/i/doc.png",
     "markdown/theme/i/email.png",
     "markdown/theme/i/folder.png",
+    "background.js",
     "popup.js",
     "options.js"
   ]
