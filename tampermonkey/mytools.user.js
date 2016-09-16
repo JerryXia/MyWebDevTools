@@ -1,38 +1,40 @@
 // ==UserScript==
-// @name         MyTools
-// @name:zh-CN   我的私有工具集
-// @name:zh-TW   我的私有工具集
-// @namespace    http://www.guqiankun.com/
-// @homepageURL  https://greasyfork.org/scripts/10453-mytools
-// @version      0.9.12
-// @description  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化，默认快捷键：ALT + M
-// @author       JerryXia
-// @icon         http://7xrmpf.com1.z0.glb.clouddn.com/avatar/3320138fe4724dbf2b3f8728ca264a32?s=48&r=G&d=
-// @license      The MIT License (MIT); http://opensource.org/licenses/MIT
-// @match        *://*/*
-// @include      /^https?\:\/\/(www|news|maps|docs|cse|encrypted)\.google\./
-// @include      http://play.baidu.com/*
-// @include      http://movie.douban.com/subject/*
-// @include      http://book.douban.com/subject/*
-// @exclude      http://blog.guqiankun.com/*
-// @exclude      http://localhost*
-// @require      https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
-// @require      https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
-// @require      https://cdn.bootcss.com/vue/2.0.0-rc.4/vue.min.js
-// @grant        unsafeWindow
-// @grant        GM_log
-// @grant        GM_addStyle
-// @grant        GM_setValue
-// @grant        GM_getValue
-// @grant        GM_deleteValue
-// @grant        GM_listValues
-// @grant        GM_addValueChangeListener
-// @grant        GM_removeValueChangeListener
-// @grant        GM_getResourceText
-// @grant        GM_getResourceURL
-// @grant        GM_openInTab
-// @grant        GM_xmlhttpRequest
-// @run-at       document-end
+// @name               MyTools
+// @name:zh-CN         我的私有工具集
+// @name:zh-TW         我的私有工具集
+// @namespace          http://www.guqiankun.com/
+// @homepageURL        https://greasyfork.org/scripts/10453-mytools
+// @version            0.9.12
+// @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化，默认快捷键：ALT + M
+// @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化，默认快捷键：ALT + M
+// @description:zh-TW  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化，默认快捷键：ALT + M
+// @author             JerryXia
+// @icon               http://7xrmpf.com1.z0.glb.clouddn.com/avatar/3320138fe4724dbf2b3f8728ca264a32?s=48&r=G&d=
+// @license            The MIT License (MIT); http://opensource.org/licenses/MIT
+// @match              *://*/*
+// @include            /^https?\:\/\/(www|news|maps|docs|cse|encrypted)\.google\./
+// @include            http://play.baidu.com/*
+// @include            http://movie.douban.com/subject/*
+// @include            http://book.douban.com/subject/*
+// @exclude            http://blog.guqiankun.com/*
+// @exclude            http://localhost*
+// @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
+// @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
+// @require            https://cdn.bootcss.com/vue/2.0.0-rc.4/vue.min.js
+// @grant              unsafeWindow
+// @grant              GM_log
+// @grant              GM_addStyle
+// @grant              GM_setValue
+// @grant              GM_getValue
+// @grant              GM_deleteValue
+// @grant              GM_listValues
+// @grant              GM_addValueChangeListener
+// @grant              GM_removeValueChangeListener
+// @grant              GM_getResourceText
+// @grant              GM_getResourceURL
+// @grant              GM_openInTab
+// @grant              GM_xmlhttpRequest
+// @run-at             document-end
 // @noframes
 // ==/UserScript==
 
