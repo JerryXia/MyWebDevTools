@@ -403,6 +403,21 @@ var GmUtils = (function () {
             }
         }
 
+        if(vm.enabledDirectZhihuLink){
+            $('a.external').each(function(i, dom){
+                if(dom.nodeName.toUpperCase()==='A') {
+                    var old = dom.href;
+                    if(old && old.indexOf('//link.zhihu.com/?') >= 0) {
+                        old = old.match(/target=(.+?)(&|$)/);
+                        if(old && old.length >= 2) {
+                            dom.href = decodeURIComponent(old[1]);
+                        }
+                    }
+                    return;
+                }
+            });
+        }
+
     }
 
     // View
@@ -447,8 +462,6 @@ var GmUtils = (function () {
 '                </div>',
 '                <div class="form-row{{guid}}">',
 '                    <label title="知乎扁平化UI"><input type="checkbox" id="mytools_flatZhihu{{guid}}" v-model="enabledFlatZhihu" />知乎扁平化UI</label>',
-'                </div>',
-'                <div class="form-row{{guid}}">',
 '                    <label title="知乎真实链接地址重定向"><input type="checkbox" id="mytools_directZhihuLink{{guid}}" v-model="enabledDirectZhihuLink" />知乎真实链接地址重定向</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
