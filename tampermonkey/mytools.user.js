@@ -4,10 +4,10 @@
 // @name:zh-TW         我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            0.9.13
-// @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化，默认快捷键：ALT + M
-// @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化，默认快捷键：ALT + M
-// @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載連接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化，默認快捷鍵：ALT + M
+// @version            0.9.14
+// @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
+// @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
+// @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載連接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
 // @author             JerryXia
 // @icon               http://7xrmpf.com1.z0.glb.clouddn.com/avatar/3320138fe4724dbf2b3f8728ca264a32?s=48&r=G&d=
 // @license            The MIT License (MIT); http://opensource.org/licenses/MIT
@@ -449,6 +449,9 @@ var GmUtils = (function () {
 '                    <label title="知乎扁平化UI"><input type="checkbox" id="mytools_flatZhihu{{guid}}" v-model="enabledFlatZhihu" />知乎扁平化UI</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
+'                    <label title="知乎真实链接地址重定向"><input type="checkbox" id="mytools_directZhihuLink{{guid}}" v-model="enabledDirectZhihuLink" />知乎真实链接地址重定向</label>',
+'                </div>',
+'                <div class="form-row{{guid}}">',
 '                    <label>工具面板快捷键：</label>',
 //'                    <select v-model="bindKeyCodeOne">',
 '                    <select disabled="disabled">',
@@ -499,6 +502,7 @@ var GmUtils = (function () {
             enabledGwd: false,
             enabledBdYunLargeFileDownload: false,
             enabledFlatZhihu: false,
+            enabledDirectZhihuLink: false,
             // 操作界面
             showBox: false
         },
@@ -530,6 +534,7 @@ var GmUtils = (function () {
                 gmUtils.setVal('config_enabledGwd', vm.enabledGwd);
                 gmUtils.setVal('config_enabledFlatZhihu', vm.enabledFlatZhihu);
                 gmUtils.setVal('config_enabledBdYunLargeFileDownload', vm.enabledBdYunLargeFileDownload);
+                gmUtils.setVal('config_enabledDirectZhihuLink', vm.enabledDirectZhihuLink);
                 vm.showBox = !vm.showBox;
 
                 var env = vm.enabledDebugModel ? 'Debug' : 'Release';
@@ -559,6 +564,7 @@ var GmUtils = (function () {
         vm.enabledGwd = gmUtils.getVal('config_enabledGwd', true);
         vm.enabledFlatZhihu = gmUtils.getVal('config_enabledFlatZhihu', true);
         vm.enabledBdYunLargeFileDownload = gmUtils.getVal('config_enabledBdYunLargeFileDownload', true);
+        vm.enabledDirectZhihuLink = gmUtils.getVal('config_enabledDirectZhihuLink', true);
     }
     // 第3步：加载配置到ViewModel的中
     loadConfigToVmData();
