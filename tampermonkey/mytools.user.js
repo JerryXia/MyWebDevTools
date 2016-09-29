@@ -4,7 +4,7 @@
 // @name:zh-TW         我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            0.9.14
+// @version            0.9.15
 // @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載連接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -20,7 +20,7 @@
 // @exclude            http://localhost*
 // @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
 // @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
-// @require            https://cdn.bootcss.com/vue/2.0.0-rc.5/vue.min.js
+// @require            https://cdn.bootcss.com/vue/2.0.0-rc.7/vue.min.js
 // @grant              unsafeWindow
 // @grant              GM_log
 // @grant              GM_addStyle
