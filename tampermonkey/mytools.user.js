@@ -4,7 +4,7 @@
 // @name:zh-TW         我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            0.9.15
+// @version            1.0.0
 // @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載連接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -20,7 +20,6 @@
 // @exclude            http://localhost*
 // @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
 // @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
-// @require            https://cdn.bootcss.com/vue/2.0.0-rc.7/vue.min.js
 // @grant              unsafeWindow
 // @grant              GM_log
 // @grant              GM_addStyle
@@ -435,34 +434,34 @@ var GmUtils = (function () {
         '#body{{guid}} input:focus {border-color: #99baca; outline: 0; background: #f5fbfe; color: #666; } ';
 
         tpl.html = [
-'<div id="mytoolsWrapper{{guid}}" v-show="showMenu || showBox">',
-'    <div id="toolMenu" v-if="showMenu" v-on:click="switchShowBox" style="position:fixed; top:100px; left:30px; z-index:999; padding:20px 5px; width:50px; height:20px; line-height:20px; text-align:center; border:1px solid; border-color:#888; border-radius:50%; background:rgba(0,0,0,.5); color:#FFF; font:12px/1.5 \'Microsoft YaHei\', sans-serif;cursor: pointer;-webkit-box-sizing: content-box; -moz-box-sizing:content-box; box-sizing:content-box;">工具集</div>',
-'    <div id="uil_blocker{{guid}}" v-if="showBox" style="position:fixed;top:0px;left:0px;right:0px;bottom:0px;background-color:#000;opacity:0.5;z-index:9999;"></div>',
-'    <div id="mytools_preferences{{guid}}" v-if="showBox" style="position:fixed;top:12%;left:30%;width: 500px;z-index:10000;">',
+'<div id="mytoolsWrapper{{guid}}">',
+'    <div id="toolMenu{{guid}}" style="position:fixed; top:100px; left:30px; z-index:999; padding:20px 5px; width:50px; height:20px; line-height:20px; text-align:center; border:1px solid; border-color:#888; border-radius:50%; background:rgba(0,0,0,.5); color:#FFF; font:12px/1.5 \'Microsoft YaHei\', sans-serif;cursor: pointer;-webkit-box-sizing: content-box; -moz-box-sizing:content-box; box-sizing:content-box;">工具集</div>',
+'    <div id="uil_blocker{{guid}}" style="position:fixed;top:0px;left:0px;right:0px;bottom:0px;background-color:#000;opacity:0.5;z-index:9999;"></div>',
+'    <div id="mytools_preferences{{guid}}" style="position:fixed;top:12%;left:30%;width: 500px;z-index:10000;">',
 '        <div id="body{{guid}}">',
 '            <form>',
 '                <div id="mytools_top_buttons{{guid}}">',
-'                    <input type="button" id="mytools_save_button{{guid}}" value="√ 确认" v-on:click="saveVmDataToConfig" title="部分选项需要刷新页面才能生效" />',
-'                    <input type="button" id="mytools_close_button{{guid}}" value="X 取消" v-on:click="switchShowBox" title="关闭" />',
+'                    <input type="button" id="mytools_save_button{{guid}}" value="√ 确认" title="部分选项需要刷新页面才能生效" />',
+'                    <input type="button" id="mytools_close_button{{guid}}" value="X 取消" title="关闭" />',
 '                </div>',
 '                <div class="form-row{{guid}}">',
 '                    MyTools 配置项',
-'                    <label><input type="checkbox" id="mytools_debug{{guid}}" v-model="enabledDebugModel" />调试模式</label>',
+'                    <label><input type="checkbox" id="mytools_debug{{guid}}" />调试模式</label>',
 '                    <a href="http://blog.guqiankun.com/contact" target="_blank" style="color:#065488;">反馈地址</a>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
-'                    <label title="绕过Google重定向直接访问网页"><input type="checkbox" id="mytools_DirectGoogle{{guid}}" v-model="enabledDirectGoogle" />Direct Google</label>',
-'                    <label title="百度音乐盒去广告"><input type="checkbox" id="mytools_BdMusicRemoveAd{{guid}}" v-model="enabledBdMusicRemoveAd" />百度音乐盒去广告</label>',
-'                    <label title="增加豆瓣电影、图书的下载搜索链接"><input type="checkbox" id="mytools_DouBanDownload{{guid}}" v-model="enabledDouBanDownload" />Douban Download Search</label>',
+'                    <label title="绕过Google重定向直接访问网页"><input type="checkbox" id="mytools_DirectGoogle{{guid}}" />Direct Google</label>',
+'                    <label title="百度音乐盒去广告"><input type="checkbox" id="mytools_BdMusicRemoveAd{{guid}}" />百度音乐盒去广告</label>',
+'                    <label title="增加豆瓣电影、图书的下载搜索链接"><input type="checkbox" id="mytools_DouBanDownload{{guid}}" />Douban Download Search</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
-'                    <label title="网页右键解锁"><input type="checkbox" id="mytools_CopyPage{{guid}}" v-model="enabledCopyPage" />网页右键解锁</label>',
-'                    <label title="购物党比价工具"><input type="checkbox" id="mytools_Gwd{{guid}}" v-model="enabledGwd" />购物党比价工具</label>',
-'                    <label title="解决百度云大文件下载限制"><input type="checkbox" id="mytools_bdYunLargeFileDownload{{guid}}" v-model="enabledBdYunLargeFileDownload" />解决百度云大文件下载限制</label>',
+'                    <label title="网页右键解锁"><input type="checkbox" id="mytools_CopyPage{{guid}}" />网页右键解锁</label>',
+'                    <label title="购物党比价工具"><input type="checkbox" id="mytools_Gwd{{guid}}" />购物党比价工具</label>',
+'                    <label title="解决百度云大文件下载限制"><input type="checkbox" id="mytools_bdYunLargeFileDownload{{guid}}" />解决百度云大文件下载限制</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
-'                    <label title="知乎扁平化UI"><input type="checkbox" id="mytools_flatZhihu{{guid}}" v-model="enabledFlatZhihu" />知乎扁平化UI</label>',
-'                    <label title="知乎真实链接地址重定向"><input type="checkbox" id="mytools_directZhihuLink{{guid}}" v-model="enabledDirectZhihuLink" />知乎真实链接地址重定向</label>',
+'                    <label title="知乎扁平化UI"><input type="checkbox" id="mytools_flatZhihu{{guid}}" />知乎扁平化UI</label>',
+'                    <label title="知乎真实链接地址重定向"><input type="checkbox" id="mytools_directZhihuLink{{guid}}" />知乎真实链接地址重定向</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
 '                    <label>工具面板快捷键：</label>',
@@ -473,8 +472,8 @@ var GmUtils = (function () {
 '                        <option value="18" selected="selected">Alt</option>',
 '                    </select>',
 '                    <span>+</span>',
-'                    <input type="text" v-model="bindKeyCode1" style="width:24px" />',
-'                    <label title="通过快捷键切换或在 Greasemonkey 用户脚本命令处打开设置窗口"><input type="checkbox" id="mytools_showMenu{{guid}}" v-model="showMenu" />显示菜单</label>',
+'                    <input type="text" id="mytools_bindKeyCode1{{guid}}" style="width:24px" />',
+'                    <label title="通过快捷键切换或在 Greasemonkey 用户脚本命令处打开设置窗口"><input type="checkbox" id="mytools_showMenu{{guid}}" />显示菜单</label>',
 '                </div>',
 '            </form>',
 '            <div id="conqr{{guid}}" style="position:relative; width:200px;">',
@@ -501,65 +500,42 @@ var GmUtils = (function () {
     viewInit();
 
     // 第2步：数据绑定
-    var vm = new Vue({
-        el: '#mytoolsWrapper' + currentGuid,
-        data: {
-            showMenu: false,
-            bindKeyCodeOne: 0,
-            bindKeyCode1: 0,
-            enabledDebugModel: false,
-            enabledDirectGoogle: false,
-            enabledBdMusicRemoveAd: false,
-            enabledDouBanDownload: false,
-            enabledCopyPage: false,
-            enabledGwd: false,
-            enabledBdYunLargeFileDownload: false,
-            enabledFlatZhihu: false,
-            enabledDirectZhihuLink: false,
-            // 操作界面
-            showBox: false
-        },
-        computed: {
-            showWrapper: function () {
-                // 一个计算属性的 getter
-                // 不用了
-                if(this.showMenu === false && this.showBox === false){
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        },
-        methods: {
-            switchShowBox: function () {
-                this.showBox = !this.showBox;
-            },
-            saveVmDataToConfig: function(){
-                gmUtils.setVal('config_showMenu', vm.showMenu);
-                gmUtils.setVal('config_bindKeyCodeOne', vm.bindKeyCodeOne);
-                gmUtils.log(vm.bindKeyCodeOne);
-                gmUtils.setVal('config_bindKeyCode1', vm.bindKeyCode1);
-                gmUtils.setVal('config_enabledDebugModel', vm.enabledDebugModel);
-                gmUtils.setVal('config_enabledDirectGoogle', vm.enabledDirectGoogle);
-                gmUtils.setVal('config_enabledBdMusicRemoveAd', vm.enabledBdMusicRemoveAd);
-                gmUtils.setVal('config_enabledDouBanDownload', vm.enabledDouBanDownload);
-                gmUtils.setVal('config_enabledCopyPage', vm.enabledCopyPage);
-                gmUtils.setVal('config_enabledGwd', vm.enabledGwd);
-                gmUtils.setVal('config_enabledFlatZhihu', vm.enabledFlatZhihu);
-                gmUtils.setVal('config_enabledBdYunLargeFileDownload', vm.enabledBdYunLargeFileDownload);
-                gmUtils.setVal('config_enabledDirectZhihuLink', vm.enabledDirectZhihuLink);
-                vm.showBox = !vm.showBox;
+    var vm = {
+        showMenu: false,
+        bindKeyCodeOne: 0,
+        bindKeyCode1: 0,
+        enabledDebugModel: false,
+        enabledDirectGoogle: false,
+        enabledBdMusicRemoveAd: false,
+        enabledDouBanDownload: false,
+        enabledCopyPage: false,
+        enabledGwd: false,
+        enabledBdYunLargeFileDownload: false,
+        enabledFlatZhihu: false,
+        enabledDirectZhihuLink: false,
+        // 操作界面
+        showBox: false,
+        saveVmDataToConfig: function(){
+            gmUtils.setVal('config_showMenu', vm.showMenu);
+            gmUtils.setVal('config_bindKeyCodeOne', vm.bindKeyCodeOne);
+            gmUtils.log(vm.bindKeyCodeOne);
+            gmUtils.setVal('config_bindKeyCode1', vm.bindKeyCode1);
+            gmUtils.setVal('config_enabledDebugModel', vm.enabledDebugModel);
+            gmUtils.setVal('config_enabledDirectGoogle', vm.enabledDirectGoogle);
+            gmUtils.setVal('config_enabledBdMusicRemoveAd', vm.enabledBdMusicRemoveAd);
+            gmUtils.setVal('config_enabledDouBanDownload', vm.enabledDouBanDownload);
+            gmUtils.setVal('config_enabledCopyPage', vm.enabledCopyPage);
+            gmUtils.setVal('config_enabledGwd', vm.enabledGwd);
+            gmUtils.setVal('config_enabledFlatZhihu', vm.enabledFlatZhihu);
+            gmUtils.setVal('config_enabledBdYunLargeFileDownload', vm.enabledBdYunLargeFileDownload);
+            gmUtils.setVal('config_enabledDirectZhihuLink', vm.enabledDirectZhihuLink);
+            vm.showBox = !vm.showBox;
 
-                var env = vm.enabledDebugModel ? 'Debug' : 'Release';
-                gmUtils.setEnv(env);
-            }
+            var env = vm.enabledDebugModel ? 'Debug' : 'Release';
+            gmUtils.setEnv(env);
         }
-    });
-    vm.$watch('showBox', function (newVal, oldVal) {
-        if(newVal){
-            convertUrl2QR();
-        }
-    });
+    };
+    convertUrl2QR();
 
     function loadConfigToVmData(){
         vm.enabledDebugModel = gmUtils.getVal('config_enabledDebugModel', false);
@@ -584,6 +560,144 @@ var GmUtils = (function () {
     // 第4步：功能启动
     startFeaturesByConfig();
 
+
+    function renderVmData(){
+        if(vm.showMenu || vm.showBox){
+            $('#mytoolsWrapper' + currentGuid).show();
+        }else{
+            $('#mytoolsWrapper' + currentGuid).hide();
+        }
+
+        if(vm.showMenu){
+            $('#mytools_showMenu' + currentGuid).attr('checked', 'checked');
+            $('#toolMenu' + currentGuid).show();
+        }else{
+            $('#mytools_showMenu' + currentGuid).removeAttr('checked', 'checked');
+            $('#toolMenu' + currentGuid).hide();
+        }
+
+        if(vm.showBox){
+            $('#uil_blocker' + currentGuid).show();
+            $('#mytools_preferences' + currentGuid).show();
+        }else{
+            $('#uil_blocker' + currentGuid).hide();
+            $('#mytools_preferences' + currentGuid).hide();
+        }
+
+        if(vm.enabledDebugModel){
+            $('#mytools_debug' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_debug' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledDirectGoogle){
+            $('#mytools_DirectGoogle' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_DirectGoogle' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledBdMusicRemoveAd){
+            $('#mytools_BdMusicRemoveAd' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_BdMusicRemoveAd' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledDouBanDownload){
+            $('#mytools_DouBanDownload' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_DouBanDownload' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledCopyPage){
+            $('#mytools_CopyPage' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_CopyPage' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledGwd){
+            $('#mytools_Gwd' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_Gwd' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledBdYunLargeFileDownload){
+            $('#mytools_bdYunLargeFileDownload' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_bdYunLargeFileDownload' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledFlatZhihu){
+            $('#mytools_flatZhihu' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_flatZhihu' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledDirectZhihuLink){
+            $('#mytools_directZhihuLink' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_directZhihuLink' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        $('#mytools_bindKeyCode1' + currentGuid).val(vm.bindKeyCode1);
+
+    };
+    // 第五步：渲染数据
+    renderVmData();
+
+
+    $('body').on('click', '#toolMenu' + currentGuid, function(){
+        vm.showBox = true;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_save_button' + currentGuid, function(){
+        vm.saveVmDataToConfig();
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_close_button' + currentGuid, function(){
+        vm.showBox = false;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_debug' + currentGuid, function(){
+        vm.enabledDebugModel = !vm.enabledDebugModel;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_showMenu' + currentGuid, function(){
+        vm.showMenu = !vm.showMenu;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_DirectGoogle' + currentGuid, function(){
+        vm.enabledDirectGoogle = !vm.enabledDirectGoogle;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_BdMusicRemoveAd' + currentGuid, function(){
+        vm.enabledBdMusicRemoveAd = !vm.enabledBdMusicRemoveAd;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_DouBanDownload' + currentGuid, function(){
+        vm.enabledDouBanDownload = !vm.enabledDouBanDownload;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_CopyPage' + currentGuid, function(){
+        vm.enabledCopyPage = !vm.enabledCopyPage;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_Gwd' + currentGuid, function(){
+        vm.enabledGwd = !vm.enabledGwd;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_bdYunLargeFileDownload' + currentGuid, function(){
+        vm.enabledBdYunLargeFileDownload = !vm.enabledBdYunLargeFileDownload;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_flatZhihu' + currentGuid, function(){
+        vm.enabledFlatZhihu = !vm.enabledFlatZhihu;
+        renderVmData();
+    });
+    $('body').on('click', '#mytools_directZhihuLink' + currentGuid, function(){
+        vm.enabledDirectZhihuLink = !vm.enabledDirectZhihuLink;
+        renderVmData();
+    });
+
     $('body').keydown(function(e){
         var config_bindKeyCodeOne = gmUtils.getVal('config_bindKeyCodeOne', 18);
         var config_bindKeyCode1 = gmUtils.getVal('config_bindKeyCode1', 77);
@@ -607,6 +721,7 @@ var GmUtils = (function () {
         }else{
             gmUtils.log('进入default');
         }
+        renderVmData();
     });
 
 })(new GmUtils('Release'), (window.MutationObserver || window.WebKitMutationObserver));
