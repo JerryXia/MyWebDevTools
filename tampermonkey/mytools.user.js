@@ -4,7 +4,7 @@
 // @name:zh-TW         我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.0.1
+// @version            1.0.2
 // @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載連接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -403,18 +403,24 @@ var GmUtils = (function () {
         }
 
         if(vm.enabledDirectZhihuLink){
-            $('a.external').each(function(i, dom){
-                if(dom.nodeName.toUpperCase()==='A') {
-                    var old = dom.href;
-                    if(old && old.indexOf('//link.zhihu.com/?') >= 0) {
-                        old = old.match(/target=(.+?)(&|$)/);
-                        if(old && old.length >= 2) {
-                            dom.href = decodeURIComponent(old[1]);
+            var replaceLink = function(){
+                $('a.external').each(function(i, dom){
+                    if(dom.nodeName.toUpperCase()==='A') {
+                        var old = dom.href;
+                        if(old && old.indexOf('//link.zhihu.com/?') >= 0) {
+                            old = old.match(/target=(.+?)(&|$)/);
+                            if(old && old.length >= 2) {
+                                dom.href = decodeURIComponent(old[1]);
+                            }
                         }
                     }
-                    return;
-                }
-            });
+                });
+            };
+
+            setTimeout(replaceLink, 200);
+            setTimeout(replaceLink, 2000);
+            setTimeout(replaceLink, 5000);
+            setTimeout(replaceLink, 7000);
         }
 
         if(true){
