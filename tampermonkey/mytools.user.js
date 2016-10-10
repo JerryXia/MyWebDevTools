@@ -372,7 +372,7 @@ var GmUtils = (function () {
             ];
             for(var urlIndex = 0, len = includeUrls.length; urlIndex < len; urlIndex++){
                 if(window.location.hostname.indexOf(includeUrls[urlIndex]) > -1){
-                    Object.defineProperty(navigator,"platform",{value:"sb_baidu",writable:false,configurable:false,enumerable:true});
+                    //Object.defineProperty(navigator,"platform",{value:"sb_baidu",writable:false,configurable:false,enumerable:true});
                     if(window.location.protocol === 'http:' && /http:/.test(window.location.href)) {
                         window.location.href = 'https' + window.location.href.slice(4);
                     }
