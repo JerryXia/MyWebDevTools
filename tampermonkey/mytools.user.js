@@ -4,7 +4,7 @@
 // @name:zh-TW         我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.0.4
+// @version            1.0.5
 // @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載連接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -263,15 +263,19 @@ var GmUtils = (function () {
             var keyword1 = title.replace( '(豆瓣)', '' ).trim();
             var keyword2 = encodeURIComponent( keyword1 );
             var movieSimpleTitle = movieTitle.replace(/第\S+季.*/, "");
+            var movieSubjectId = location.hostname === 'movie.douban.com'?location.pathname.split('/')[2]:'';
 
             var Movie_links = [
                 // { html: "百度盘", href: "http://www.baidu.com/s?wd=" + encodeURIComponent(keyword1 + " site:pan.baidu.com")},
-                { html: "百度盘", href: "https://www.google.com/search?q=" + keyword1 + " site:pan.baidu.com"},
-                { html: "人人影视", href: "http://www.yayaxz.com/search/" + movieSimpleTitle },
+                { html: "豆瓣皮", href: "http://movie.doubanpi.com/subject/"+ movieSubjectId +"/#tab_link"},
+                { html: "百度盘", href: "https://www.google.com/search?q=site:pan.baidu.com " + keyword2},
+                { html: "bilibili", href: "http://search.bilibili.com/all?keyword=" + keyword2 },
+                { html: "acfun", href: "http://www.acfun.tv/search/#query=" + keyword2 },
+                //{ html: "人人影视", href: "http://www.yayaxz.com/search/" + movieSimpleTitle },
                 { html: "VeryCD", href: "http://www.verycd.com/search/folders/" + keyword2 },
-                { html: "SimpleCD", href: "http://simplecd.me/search/entry/?query=" + keyword1 },
-                { html: "Donkey4u", href: "http://donkey4u.com/search/" + movieTitle },
-                { html: "Torrent Project", href: "http://torrentproject.com/?&btnG=Torrent+Search&num=20&start=0&s=" + keyword2 },
+                //{ html: "SimpleCD", href: "http://simplecd.me/search/entry/?query=" + keyword1 },
+                //{ html: "Donkey4u", href: "http://donkey4u.com/search/" + movieTitle },
+                { html: "Torrent Project", href: "https://torrentproject.se/?&btnG=Torrent+Search&num=20&start=0&s=" + keyword2 },
                 { html: "Google MiniSD", href: "https://www.google.com/search?ie=UTF-8&q=" + movieTitle + "+MiniSD" }
             ];
             var Book_links = [
@@ -294,11 +298,24 @@ var GmUtils = (function () {
                         .append('<span class="pl">字幕链接:</span>')
                         .append(
                             $("<a>").attr({
-                                href: "http://shooter.cn/search/" + movieTitle,
+                                href: "https://secure.assrt.net/sub/?searchword=" + keyword2,
                                 target: "_blank"
-                            }).html("Shooter")
+                            }).html("伪射手")
+                        )
+                        .append(' / ')
+                        .append(
+                            $("<a>").attr({
+                                href: "http://subhd.com/search/" + keyword2,
+                                target: "_blank"
+                            }).html("subhd")
+                        )
+                        .append(' / ')
+                        .append(
+                            $("<a>").attr({
+                                href: "http://www.zimuzu.tv/search?type=subtitle&keyword=" + keyword2,
+                                target: "_blank"
+                            }).html("zimuzu")
                         );
-
                     break;
                 case "book.douban.com":
                     appendLinks(Book_links, link);
