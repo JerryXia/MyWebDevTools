@@ -4,10 +4,10 @@
 // @name:zh-TW         我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.0.5
-// @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
-// @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载连接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
-// @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載連接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
+// @version            1.0.6
+// @description        我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
+// @description:zh-CN  我的工具集：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
+// @description:zh-TW  我的工具集：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
 // @author             JerryXia
 // @icon               http://7xrmpf.com1.z0.glb.clouddn.com/avatar/3320138fe4724dbf2b3f8728ca264a32?s=48&r=G&d=
 // @license            The MIT License (MIT); http://opensource.org/licenses/MIT
