@@ -4,7 +4,7 @@
 // @name:zh-TW         我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.0.9
+// @version            1.0.10
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -18,6 +18,7 @@
 // @include            http://book.douban.com/subject/*
 // @exclude            http://blog.guqiankun.com/*
 // @exclude            http://localhost*
+// @exclude            http://www.jxhld.gov.cn/*
 // @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
 // @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
 // @grant              unsafeWindow
@@ -102,12 +103,12 @@ var GmUtils = (function () {
     function convertUrl2QR(url) {
         url = url || location.href;
         var imgUrl = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=Q|0&chl=" + encodeURIComponent(url);
-        var favUrl = $("head link[rel*='icon']").attr('href') || '//' + location.hostname + '/favicon.ico';
-        $('#fav'+currentGuid).attr("src", favUrl).show();
-        $('#fav'+currentGuid, '#qr'+currentGuid).bind("error", function(e) {
+        var favUrl = jQuery("head link[rel*='icon']").attr('href') || '//' + location.hostname + '/favicon.ico';
+        jQuery('#fav'+currentGuid).attr("src", favUrl).show();
+        jQuery('#fav'+currentGuid, '#qr'+currentGuid).bind("error", function(e) {
             $(e.target).hide();
         });
-        $('#qr'+currentGuid).attr("src", imgUrl);
+        jQuery('#qr'+currentGuid).attr("src", imgUrl);
     }
 
     /*Direct Google*/
