@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name               MyTools:我的私人工具集
-// @name:zh-CN         MyTools:我的私有工具集
-// @name:zh-TW         MyTools:我的私有工具集
+// @name               MyTools：我的私人工具集
+// @name:zh-CN         MyTools：我的私有工具集
+// @name:zh-TW         MyTools：我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
 // @version            1.0.13
