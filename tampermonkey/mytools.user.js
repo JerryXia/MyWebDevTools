@@ -4,7 +4,7 @@
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.1.1
+// @version            1.1.2
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -445,7 +445,7 @@ var GmUtils = (function () {
         }
         function videoFuck(){
             var w = $('#playerBox').width();
-            var h = $('#playerBox').height();
+            var h = $('#playerBox').height() - 50;
             var iframeSrc = 'https://api.47ks.com/webcloud/?url='+ encodeURIComponent(location.href);
             $('#module_basic_player').html('<iframe src="'+iframeSrc+'" border="0" width="'+w+'" height="'+h+'"></iframe>');
             console.log('隐藏功能在作怪。');
