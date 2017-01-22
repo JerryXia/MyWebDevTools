@@ -4,7 +4,7 @@
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.1.3
+// @version            1.1.4
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -96,6 +96,15 @@ var GmUtils = (function () {
         }
         return guid;
     }
+    String.format = function () {
+        if (arguments.length == 0) return null;
+        var str = arguments[0];
+        for (var i = 1; i < arguments.length; i++) {
+            var regExp = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+            str = str.replace(regExp, arguments[i])
+        }
+        return str;
+    };
     String.prototype.contains = function(s) {
         return -1 !== this.indexOf(s);
     };
@@ -448,7 +457,41 @@ var GmUtils = (function () {
             var w = $('#playerBox').width();
             var h = $('#playerBox').height() - 50;
             var iframeSrc = 'https://api.47ks.com/webcloud/?url='+ encodeURIComponent(location.href);
-            $('#module_basic_player').html('<iframe src="'+iframeSrc+'" border="0" width="'+w+'" height="'+h+'"></iframe>');
+            $('#module_basic_player').html('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h);
+
+            //嵌入式视频0
+            var flagVideo = $('embed').each(function(i, v){
+                var $this = $(v);
+                var src = $this.attr('src');
+                if(src && src.length > 0){
+                    var match = src.match(/^http:\/\/player.youku.com\/player.php\/sid\/(.+)\/v.swf/i);
+                    if(match && match.length == 2){
+                        var w = $this.width();
+                        var h = $this.height() - 50;
+                        var youkuUrl = String.format('http://v.youku.com/v_show/id_{0}.html', match[1]);
+                        var iframeSrc = 'https://api.47ks.com/webcloud/?url='+ encodeURIComponent(youkuUrl);
+                        $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($this);
+                        $this.remove();
+                    }
+                }
+            });
+            //嵌入式视频1
+            var flagVideo = $('embed').each(function(i, v){
+                var $this = $(v);
+                var src = $this.attr('src');
+                if(src && src.length > 0){
+                    var match = src.match(/sid\/(.+)\/v.swf/i);
+                    if(match && match.length == 2){
+                        var w = $this.width();
+                        var h = $this.height() - 50;
+                        var youkuUrl = String.format('http://v.youku.com/v_show/id_{0}.html', match[1]);
+                        var iframeSrc = 'https://api.47ks.com/webcloud/?url='+ encodeURIComponent(youkuUrl);
+                        $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($this);
+                        $this.remove();
+                    }
+                }
+            });
+
             console.log('隐藏功能在作怪。');
         }
 
