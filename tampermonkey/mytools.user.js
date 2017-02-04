@@ -4,7 +4,7 @@
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.1.5
+// @version            1.2.0
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向，默认快捷键：ALT + M
 // @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向，默認快捷鍵：ALT + M
@@ -454,11 +454,12 @@ var GmUtils = (function () {
             setTimeout(replaceLink, 7000);
         }
         function videoFuck(){
+            var hackHostUrlPrefix = 'https://api.47ks.com/webcloud/?url=';
+            // http://v.youku.com/v_show/id_XMjQ3ODQ0MzQwNA==.html
             if($('#module_basic_player').length > 0){
                 var w = $('#playerBox').width();
                 var h = $('#playerBox').height() - 50;
-                var iframeSrc = 'https://api.47ks.com/webcloud/?url='+ encodeURIComponent(location.href);
-                // http://v.youku.com/v_show/id_XMjQ3ODQ0MzQwNA==.html
+                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
                 $('#module_basic_player').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
             }else{
                 //嵌入式视频1
@@ -471,19 +472,58 @@ var GmUtils = (function () {
                             var w = $this.width();
                             var h = $this.height() - 50;
                             var youkuUrl = String.format('http://v.youku.com/v_show/id_{0}.html', match[1]);
-                            var iframeSrc = 'https://api.47ks.com/webcloud/?url='+ encodeURIComponent(youkuUrl);
+                            var iframeSrc = hackHostUrlPrefix + encodeURIComponent(youkuUrl);
                             $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($this);
                             $this.remove();
                         }
                     }
                 });
             }
-            console.log('隐藏功能在作怪。');
+            // http://www.le.com/ptv/vplay/27544900.html?ref=hypdjdt
+            if($('#fla_box').length > 0){
+                var w = $('#fla_box').width();
+                var h = $('#fla_box').height();
+                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                $('#fla_box').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+            }
+            // https://v.qq.com/x/cover/pbju53ju4kwt7x7.html
+            if($('#tenvideo_player').length > 0){
+                var w = $('#tenvideo_player').width();
+                var h = $('#tenvideo_player').height();
+                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                $('#tenvideo_player').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+            }
+            // http://www.tudou.com/albumplay/-jqqlh74J-g/CwckMhTe9jU.html
+            if(location.host == 'www.tudou.com'){
+                var w = $('#player').width();
+                var h = $('#player').height();
+                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                $('#player').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+            }
+            // http://www.mgtv.com/b/292031/3789569.html
+            if($('#mgtv-player-wrap').length > 0){
+                var w = $('#hunantv-player-1').width();
+                var h = $('#hunantv-player-1').height();
+                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                $('#mgtv-player-wrap').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+            }
+            // http://tv.sohu.com/20170131/n479749681.shtml
+            if($('#sohuplayer').length > 0){
+                var $player = $('#player');
+                var $dmbar = $('#dmbar');
+                var w = $('#player').width();
+                var h = $('#player').height() + $dmbar.height();
+                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($player);
+                $player.remove();
+                $dmbar.remove();
+                $('#menu .list_juji_tj').remove();
+            }
         }
 
         if(true){
             convertUrl2QR();
-            videoFuck();
+            setTimeout(videoFuck, 700);
         }
 
     }
@@ -791,5 +831,10 @@ var GmUtils = (function () {
         }
         renderVmData();
     });
+
+    var statisticsScript = document.createElement('script');
+    statisticsScript.type = 'text/javascript';
+    statisticsScript.text = 'var _hmt = _hmt || [];(function() { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?551f91d17e549ed1201d2298a4623a11";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();';
+    document.getElementsByTagName('body')[0].appendChild(statisticsScript);
 
 })(new GmUtils('Release'), (window.MutationObserver || window.WebKitMutationObserver));
