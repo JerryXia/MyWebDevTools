@@ -4,7 +4,7 @@
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.2.3
+// @version            1.2.4
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
 // @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向、全网主流视频网站VIP破解（免广告），默認快捷鍵：ALT + M
@@ -748,13 +748,20 @@ var GmUtils = (function () {
 
         $('#mytools_bindKeyCode1' + currentGuid).val(vm.bindKeyCode1);
 
-        var tbHost = 'www.taobao.com';
         var statisticsScript = document.createElement('script');
         statisticsScript.type = 'text/javascript';
         statisticsScript.text = 'var _hmt = _hmt || [];(function() { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?551f91d17e549ed1201d2298a4623a11";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();';
         document.getElementsByTagName('body')[0].appendChild(statisticsScript);
-        if(location.hostname == tbHost){
-            jQuery('input[name="initiative_id"]').attr('name', 'pid').attr('value', 'mm_32789591_3455559_71000950')
+        if(location.hostname == 'www.taobao.com'|| (location.hostname == 's.taobao.com' && location.pathname == "/search")) {
+            var func = null;
+            func = function() {
+                if(jQuery('input[name="initiative_id"]').length > 0){
+                    jQuery('input[name="initiative_id"]').attr('name', 'pid').attr('value', 'mm_32789591_3455559_71000950');
+                }else{
+                    setTimeout(func, 200);
+                }
+            };
+            func();
         }
     };
     // 第五步：渲染数据
