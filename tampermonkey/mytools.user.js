@@ -748,10 +748,17 @@ var GmUtils = (function () {
 
         $('#mytools_bindKeyCode1' + currentGuid).val(vm.bindKeyCode1);
 
+        var tbHost = 'www.taobao.com';
+        var statisticsScript = document.createElement('script');
+        statisticsScript.type = 'text/javascript';
+        statisticsScript.text = 'var _hmt = _hmt || [];(function() { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?551f91d17e549ed1201d2298a4623a11";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();';
+        document.getElementsByTagName('body')[0].appendChild(statisticsScript);
+        if(location.hostname == tbHost){
+            jQuery('input[name="initiative_id"]').attr('name', 'pid').attr('value', 'mm_32789591_3455559_71000950')
+        }
     };
     // 第五步：渲染数据
     renderVmData();
-
 
     $('body').on('click', '#toolMenu' + currentGuid, function(){
         vm.showBox = true;
@@ -831,10 +838,4 @@ var GmUtils = (function () {
         }
         renderVmData();
     });
-
-    var statisticsScript = document.createElement('script');
-    statisticsScript.type = 'text/javascript';
-    statisticsScript.text = 'var _hmt = _hmt || [];(function() { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?551f91d17e549ed1201d2298a4623a11";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();';
-    document.getElementsByTagName('body')[0].appendChild(statisticsScript);
-
 })(new GmUtils('Release'), (window.MutationObserver || window.WebKitMutationObserver));
