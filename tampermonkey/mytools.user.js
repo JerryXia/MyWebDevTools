@@ -23,6 +23,7 @@
 // @exclude            *://exmail.qq.com/*
 // @exclude            *://cas.edu.sh.cn/*
 // @require            http://7xrmpf.com1.z0.glb.clouddn.com/js/jquery/jquery.min.js
+// @require            http://7xrmpf.com1.z0.glb.clouddn.com/js/jquery/jquery.qrcode.min.js
 // @require            http://7xrmpf.com1.z0.glb.clouddn.com/js/mustache/mustache.min.js
 // @require            http://7xrmpf.com1.z0.glb.clouddn.com/js/mts/vue.A04E3C7A70CF46E4A76FC260775187CD.js
 // @grant              unsafeWindow
@@ -115,13 +116,14 @@ var GmUtils = (function () {
 
     function convertUrl2QR(url) {
         url = url || location.href;
-        var imgUrl = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=Q|0&chl=" + encodeURIComponent(url);
+        //var imgUrl = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=Q|0&chl=" + encodeURIComponent(url);
         var favUrl = jQuery("head link[rel*='icon']").attr('href') || '//' + location.hostname + '/favicon.ico';
         jQuery('#fav'+currentGuid).attr("src", favUrl).show();
         jQuery('#fav'+currentGuid, '#qr'+currentGuid).bind("error", function(e) {
             $(e.target).hide();
         });
-        jQuery('#qr'+currentGuid).attr("src", imgUrl);
+        //jQuery('#qr'+currentGuid).attr("src", imgUrl);
+        jQuery('#qr'+currentGuid).qrcode({ width: 200, height: 200, text: url });
     }
 
     /*Direct Google*/
@@ -454,6 +456,7 @@ var GmUtils = (function () {
             setTimeout(replaceLink, 5000);
             setTimeout(replaceLink, 7000);
         }
+
         function videoFuck(){
             var hackHostUrlPrefix = 'https://api.47ks.com/webcloud/?url=';
             // http://v.youku.com/v_show/id_XMjQ3ODQ0MzQwNA==.html
@@ -479,6 +482,15 @@ var GmUtils = (function () {
                         }
                     }
                 });
+            }
+            //http://www.iqiyi.com/v_19rrat4ipc.html
+            if(location.host == 'www.iqiyi.com'){
+                $this = $('#flash');
+                var w = $('#flash').width();
+                var h = $('#flash').height();
+                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($this);
+                $this.remove();
             }
             // http://www.le.com/ptv/vplay/27544900.html?ref=hypdjdt
             if($('#fla_box').length > 0){
@@ -521,12 +533,12 @@ var GmUtils = (function () {
                 $('#menu .list_juji_tj').remove();
             }
         }
-
-        if(true){
-            convertUrl2QR();
+        if(vm.enabledVideoVip){
             setTimeout(videoFuck, 700);
         }
-
+        if(true){
+            convertUrl2QR();
+        }
     }
 
     // View
@@ -572,6 +584,7 @@ var GmUtils = (function () {
 '                <div class="form-row{{guid}}">',
 '                    <label title="知乎扁平化UI"><input type="checkbox" id="mytools_flatZhihu{{guid}}" />知乎扁平化UI</label>',
 '                    <label title="知乎真实链接地址重定向"><input type="checkbox" id="mytools_directZhihuLink{{guid}}" />知乎真实链接地址重定向</label>',
+'                    <label title="全网主流视频网站VIP破解（免广告）"><input type="checkbox" id="mytools_videoVip{{guid}}" />视频VIP破解</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
 '                    <label>工具面板快捷键：</label>',
@@ -587,7 +600,7 @@ var GmUtils = (function () {
 '                </div>',
 '            </form>',
 '            <div id="conqr{{guid}}" style="position:relative; width:200px;">',
-'                <img id="qr{{guid}}" src="" style="background: #fff;padding: 5px;" />',
+'                <div id="qr{{guid}}" style="background: #fff;padding: 5px;" ></div>',
 '                <img id="fav{{guid}}" src="" style="display:none; opacity:.95; position:absolute; top:50%; left:50%; background:#fff; padding:3px; width:32px; height:32px; margin-left:-16px; margin-top:-16px; border-radius:5px;" />',
 '            </div>',
 '        </div>',
@@ -623,6 +636,7 @@ var GmUtils = (function () {
         enabledBdYunLargeFileDownload: false,
         enabledFlatZhihu: false,
         enabledDirectZhihuLink: false,
+        enabledVideoVip: false,
         // 操作界面
         showBox: false,
         saveVmDataToConfig: function(){
@@ -639,6 +653,8 @@ var GmUtils = (function () {
             gmUtils.setVal('config_enabledFlatZhihu', vm.enabledFlatZhihu);
             gmUtils.setVal('config_enabledBdYunLargeFileDownload', vm.enabledBdYunLargeFileDownload);
             gmUtils.setVal('config_enabledDirectZhihuLink', vm.enabledDirectZhihuLink);
+            gmUtils.setVal('config_enabledVideoVip', vm.enabledVideoVip);
+
             vm.showBox = !vm.showBox;
 
             var env = vm.enabledDebugModel ? 'Debug' : 'Release';
@@ -663,6 +679,7 @@ var GmUtils = (function () {
         vm.enabledFlatZhihu = gmUtils.getVal('config_enabledFlatZhihu', true);
         vm.enabledBdYunLargeFileDownload = gmUtils.getVal('config_enabledBdYunLargeFileDownload', true);
         vm.enabledDirectZhihuLink = gmUtils.getVal('config_enabledDirectZhihuLink', true);
+        vm.enabledVideoVip = gmUtils.getVal('config_enabledVideoVip', true);
     }
     // 第3步：加载配置到ViewModel的中
     loadConfigToVmData();
@@ -745,6 +762,12 @@ var GmUtils = (function () {
             $('#mytools_directZhihuLink' + currentGuid).attr('checked', 'checked');
         }else{
             $('#mytools_directZhihuLink' + currentGuid).removeAttr('checked', 'checked');
+        }
+
+        if(vm.enabledVideoVip){
+            $('#mytools_videoVip' + currentGuid).attr('checked', 'checked');
+        }else{
+            $('#mytools_videoVip' + currentGuid).removeAttr('checked', 'checked');
         }
 
         $('#mytools_bindKeyCode1' + currentGuid).val(vm.bindKeyCode1);
