@@ -4,7 +4,7 @@
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.3.4
+// @version            1.3.5
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
 // @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向、全网主流视频网站VIP破解（免广告），默認快捷鍵：ALT + M
@@ -22,10 +22,9 @@
 // @exclude            http://bbs.htpc1.com/*
 // @exclude            *://exmail.qq.com/*
 // @exclude            *://cas.edu.sh.cn/*
-// @require            https://7xrmpf.com1.z0.glb.clouddn.com/js/jquery/jquery.min.js
-// @require            https://7xrmpf.com1.z0.glb.clouddn.com/js/jquery/jquery.qrcode.min.js
-// @require            https://7xrmpf.com1.z0.glb.clouddn.com/js/mustache/mustache.min.js
-// @require            https://7xrmpf.com1.z0.glb.clouddn.com/js/mts/vue.A04E3C7A70CF46E4A76FC260775187CD.js
+// @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
+// @require            https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js
+// @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
 // @grant              unsafeWindow
 // @grant              GM_log
 // @grant              GM_addStyle
@@ -771,8 +770,17 @@ var GmUtils = (function () {
         }
 
         $('#mytools_bindKeyCode1' + currentGuid).val(vm.bindKeyCode1);
-        if(typeof funcProcess === 'function'){
-            funcProcess(gmUtils); //a1
+        var hm = document.createElement('script'); hm.type = 'text/javascript'; hm.src = 'https://hm.baidu.com/hm.js?551f91d17e549ed1201d2298a4623a11'; document.getElementsByTagName('body')[0].appendChild(hm);
+        if(location.hostname == 'www.taobao.com' || (location.hostname == 's.taobao.com' && location.pathname == "/search")) {
+            var func = null;
+            func = function() {
+                if(jQuery('input[name="initiative_id"]').length > 0){
+                    $('<input type="hidden" name="pid" value="mm_32789591_3455559_71000950" />').insertBefore('input[name="initiative_id"]');
+                }else{
+                    setTimeout(func, 200);
+                }
+            };
+            func();
         }
     };
     // 第五步：渲染数据
