@@ -22,8 +22,8 @@
 // @exclude            http://bbs.htpc1.com/*
 // @exclude            *://exmail.qq.com/*
 // @exclude            *://cas.edu.sh.cn/*
-// @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
-// @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
+// @require            http://7xrmpf.com1.z0.glb.clouddn.com/js/jquery/jquery.min.js
+// @require            http://7xrmpf.com1.z0.glb.clouddn.com/js/mustache/mustache.min.js
 // @require            http://7xrmpf.com1.z0.glb.clouddn.com/js/mts/vue.A04E3C7A70CF46E4A76FC260775187CD.js
 // @grant              unsafeWindow
 // @grant              GM_log
