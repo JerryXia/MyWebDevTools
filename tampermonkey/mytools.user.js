@@ -4,7 +4,7 @@
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          http://www.guqiankun.com/
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.3.5
+// @version            1.3.6
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
 // @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向、全网主流视频网站VIP破解（免广告），默認快捷鍵：ALT + M
@@ -569,6 +569,7 @@ var GmUtils = (function () {
 '                    MyTools 配置项',
 '                    <label><input type="checkbox" id="mytools_debug{{guid}}" />调试模式</label>',
 '                    <a href="http://blog.guqiankun.com/contact" target="_blank" style="color:#065488;">反馈地址</a>',
+'                    <label> 遇到个别页面功能出错可以先关闭某项子功能</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
 '                    <label title="绕过Google重定向直接访问网页"><input type="checkbox" id="mytools_DirectGoogle{{guid}}" />Direct Google</label>',
@@ -586,15 +587,15 @@ var GmUtils = (function () {
 '                    <label title="全网主流视频网站VIP破解（免广告）"><input type="checkbox" id="mytools_videoVip{{guid}}" />视频VIP破解</label>',
 '                </div>',
 '                <div class="form-row{{guid}}">',
-'                    <label>工具面板快捷键：</label>',
+'                    <label>面板呼出快捷键：</label>',
 //'                    <select v-model="bindKeyCodeOne">',
 '                    <select disabled="disabled">',
 //'                        <option value="16">Shift</option>',
 //'                        <option value="17">Ctrl</option>',
 '                        <option value="18" selected="selected">Alt</option>',
 '                    </select>',
-'                    <span>+</span>',
-'                    <input type="text" id="mytools_bindKeyCode1{{guid}}" style="width:24px" />',
+'                    <span>+ M</span>',
+'                    <input type="text" id="mytools_bindKeyCode1{{guid}}" style="width:24px;display:none;" />',
 '                    <label title="通过快捷键切换或在 Greasemonkey 用户脚本命令处打开设置窗口"><input type="checkbox" id="mytools_showMenu{{guid}}" />显示菜单</label>',
 '                </div>',
 '            </form>',
