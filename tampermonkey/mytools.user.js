@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.37
+// @version            1.3.38
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -561,16 +561,25 @@ var GmUtils = (function () {
                 $('#mgtv-player-wrap').html(String.format(iframeTpl, iframeSrc, w, h));
             }
             // http://tv.sohu.com/20170131/n479749681.shtml
-            if($('#sohuplayer').length > 0){
-                var $player = $('#player');
-                var $dmbar = $('#dmbar');
-                var w = $('#player').width();
-                var h = $('#player').height() + $dmbar.height();
-                var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $(String.format(iframeTpl, iframeSrc, w, h)).insertAfter($player);
-                $player.remove();
-                $dmbar.remove();
-                $('#menu .list_juji_tj').remove();
+            if(location.host.indexOf('sohu.com')>-1){
+                if($('#sohuplayer').length > 0){
+                    var $player = $('#player');
+                    var $dmbar = $('#dmbar');
+                    var w = $('#player').width();
+                    var h = $('#player').height() + $dmbar.height();
+                    var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                    $(String.format(iframeTpl, iframeSrc, w, h)).insertAfter($player);
+                    $player.remove();
+                    $dmbar.remove();
+                    $('#menu .list_juji_tj').remove();
+                }
+
+                if(location.host =="film.sohu.com" && $('#playerWrap').length > 0){
+                    var w = $('#playerWrap').width();
+                    var h = $('#playerWrap').height();
+                    var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
+                    $('#playerWrap').html(String.format(iframeTpl, iframeSrc, w, h));
+                }
             }
         }
         if(vm.enabledVideoVip){
