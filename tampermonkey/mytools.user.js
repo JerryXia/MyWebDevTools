@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.38
+// @version            1.3.39
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -26,6 +26,7 @@
 // @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
 // @require            https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js
 // @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
+// @require            https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js
 // @run-at             document-end
 // @grant              unsafeWindow
 // @grant              GM_log
@@ -498,6 +499,167 @@ var GmUtils = (function () {
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
                 $(String.format(iframeTpl, iframeSrc, w, h)).insertAfter($this);
                 $this.remove();
+
+                var loadmiqiyilibjs = function(file, data, func) {
+                    var p = [];
+                    for(var k in data){
+                        p.push(k + '=' + encodeURIComponent(data[k]));
+                    }
+                    p.push('_='+Date.now());
+                    var funcName = 'Zepto' + (''+Math.random()).substr(2);
+                    p.push('callback='+funcName);
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = file + p.join('&');
+                    document.getElementsByTagName("body")[0].appendChild(script);
+                    unsafeWindow[funcName] = func;
+                };
+                var getAlbumList = function(aid, pageNum, callback){
+                    loadmiqiyilibjs('http://mixer.video.iqiyi.com/jp/mixin/videos/avlist?', { albumId: aid, page: pageNum, size: 50 }, function(getAlbumListRes){
+                        callback(getAlbumListRes);
+                    });
+                };
+                var getSourceList = function(sid, year, month, callback){
+                    loadmiqiyilibjs('http://mixer.video.iqiyi.com/jp/mixin/videos/sdvlist?', { sourceId: sid, year: year, month: month }, function(getSourceListRes){
+                        callback(getSourceListRes);
+                    });
+                };
+
+                var pageAlbum = {};
+                var pageSource = {};
+                //Q.PageInfo.playPageInfo
+                if(Q.PageInfo.playPageInfo){
+                    if(Q.PageInfo.playPageInfo.categoryName){
+                        if(Q.PageInfo.playPageInfo.categoryName == '电视剧' || Q.PageInfo.playPageInfo.categoryName=='动漫'){
+                            getAlbumList(Q.PageInfo.playPageInfo.albumId, Q.PageInfo.playPageInfo.pageNo, function(getAlbumListRes){
+                                pageAlbum['p'+getAlbumListRes.page] = getAlbumListRes.mixinVideos;
+                                gmUtils.log('pageAlbum数组对象'+JSON.stringify(pageAlbum));
+                            });
+                            var func = null;
+                            func = function() {
+                                if($('div[data-series-elem="cont"] ul.juji-list li').length > 0) {
+                                    var flag = true;
+                                    $('div[data-series-elem="cont"] ul.juji-list li').each(function(i, v){
+                                        $item = $(v);
+                                        if($item.find('a').attr('href') && $item.find('a').attr('href').indexOf('http') > -1){
+                                            gmUtils.log('修改成功，无需在处理');
+                                        } else {
+                                            var $pageNode = $item.parent().parent();
+                                            var page = $pageNode.data('page');
+                                            gmUtils.log('当前页码: '+page);
+                                            var pageAlbumInfo = pageAlbum['p'+page];
+                                            if(pageAlbumInfo && pageAlbumInfo.length > 0){
+                                                var tofindId = $item.data('videolist-vid');
+                                                var findResult = _.find(pageAlbumInfo, function(item){ return item.vid === tofindId; });
+                                                if(findResult){
+                                                    gmUtils.log('查找成功, tofindId: '+tofindId);
+                                                    $item.find('a').attr('href', findResult.url).attr('onclick', String.format("location.href='{0}'", findResult.url));
+                                                }else{
+                                                    gmUtils.log('查找失败, tofindId: '+tofindId);
+                                                    flag = false;
+                                                }
+                                            }else{
+                                                getAlbumList(Q.PageInfo.playPageInfo.albumId, page, function(getAlbumListRes){
+                                                    pageAlbum['p'+getAlbumListRes.page] = getAlbumListRes.mixinVideos;
+                                                    gmUtils.log('pageAlbum数组对象'+JSON.stringify(pageAlbum));
+                                                });
+                                                gmUtils.log('还未加载到数据源');
+                                                flag = false;
+                                            }
+                                        }
+                                    });
+                                    if(flag){
+                                        setTimeout(func, 7000);
+                                    }else{
+                                        setTimeout(func, 2000);
+                                    }
+                                } else {
+                                    setTimeout(func, 1000);
+                                }
+                            };
+                            func();
+                        }
+
+                        //if(Q.PageInfo.playPageInfo.categoryName == '电视剧' || Q.PageInfo.playPageInfo.categoryName == '综艺'){
+                        if(Q.PageInfo.playPageInfo.categoryName == '综艺'){
+                            var tv_year = '' +  Q.PageInfo.playPageInfo.tvYear;
+                            getSourceList(Q.PageInfo.playPageInfo.sourceId, tv_year.substr(0, 4), tv_year.substr(4, 2), function(getSourceListRes){
+                                pageSource['p'+tv_year] = getSourceListRes.mixinVideos;
+                                gmUtils.log('pagelist数组对象'+JSON.stringify(pageSource));
+                            });
+                            var func = null;
+                            func = function() {
+                                if($('ul.mod-play-list li.blackArea').length > 0) {
+                                    var flag = true;
+                                    $('ul.mod-play-list li.blackArea').each(function(i, v){
+                                        $item = $(v);
+                                        if($item.data('hashacked') && $item.data('hashacked') === '1'){
+                                            //
+                                        } else {
+                                            var tv_year_child = ''+$item.data('sourcelatest-month');
+                                            if(tv_year_child.length> 0){
+                                                var pageSourceInfo = pageSource['p' + tv_year_child];
+                                                if(pageSourceInfo && pageSourceInfo.length > 0){
+                                                    var tofindId = $item.data('vid');
+                                                    var findResult = null;
+                                                    for(var everyMonthSourceInfo in pageSource){
+                                                        findResult = _.find(pageSource[everyMonthSourceInfo], function(item){ return item.vid === tofindId; });
+                                                        if(findResult && findResult.vid){
+                                                            break;
+                                                        }
+                                                    }
+                                                    if(findResult){
+                                                        gmUtils.log('查找成功, tofindId: '+tofindId);
+                                                        $item.data('hashacked', '1').find('a').each(function(i1, v1){
+                                                            $(v1).attr('href', findResult.url).attr('onclick', String.format("location.href='{0}'", findResult.url));
+                                                        });
+                                                    }else{
+                                                        gmUtils.log('查找失败, tofindId: '+tofindId);
+                                                        flag = false;
+                                                    }
+                                                }else{
+                                                    getSourceList(Q.PageInfo.playPageInfo.sourceId, tv_year_child.substr(0, 4), tv_year_child.substr(4, 2), function(getSourceListRes){
+                                                        pageSource['p' + tv_year_child] = getSourceListRes.mixinVideos;
+                                                        gmUtils.log('pagelist数组对象'+JSON.stringify(pageSource));
+                                                    });
+                                                    gmUtils.log('还未加载到数据源');
+                                                    flag = false;
+                                                }
+                                            }else{
+                                                gmUtils.log('sourcelatest-month不存在');
+                                                var tofindId = $item.data('vid');
+                                                var findResult = null;
+                                                for(var everyMonthSourceInfo in pageSource){
+                                                    findResult = _.find(pageSource[everyMonthSourceInfo], function(item){ return item.vid === tofindId; });
+                                                    if(findResult && findResult.vid){
+                                                        break;
+                                                    }
+                                                }
+                                                if(findResult){
+                                                    gmUtils.log('查找成功, tofindId: '+tofindId);
+                                                    $item.data('hashacked', '1').find('a').each(function(i1, v1){
+                                                        $(v1).attr('href', findResult.url).attr('onclick', String.format("location.href='{0}'", findResult.url));
+                                                    });
+                                                }else{
+                                                    gmUtils.log('查找失败, tofindId: '+tofindId);
+                                                    flag = false;
+                                                }
+                                            }
+                                        }
+                                    });
+                                    if(flag){
+                                        setTimeout(func, 7000);
+                                    }else{
+                                        setTimeout(func, 2000);
+                                    }
+                                } else {
+                                    setTimeout(func, 1000);
+                                }
+                            };
+                            func();
+                        }
+                    }
+                }
             }
             // http://www.le.com/ptv/vplay/27544900.html?ref=hypdjdt
             if($('#fla_box').length > 0){
@@ -522,7 +684,7 @@ var GmUtils = (function () {
                             if($this.attr('href').indexOf('javascript:')>-1){
                                 if($this.data('vid') != null && (''+$this.data('vid')).length > 0){
                                     var jump = String.format('http://www.le.com/ptv/vplay/{0}.html', $this.data('vid'));
-                                    $this.attr('href', jump).attr('onclick', String.format('location.href="{0}"', jump));
+                                    $this.attr('href', jump).attr('onclick', String.format("location.href='{0}'", jump));
                                 }
                             }
                         });
