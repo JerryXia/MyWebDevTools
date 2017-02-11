@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.36
+// @version            1.3.37
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -464,12 +464,14 @@ var GmUtils = (function () {
             //var hackHostUrlPrefix = 'http://www.wmxz.wang/video.php?url=';
             //var hackHostUrlPrefix = 'http://www.sfsft.com/admin.php?url=';
 
+            var iframeTpl = '<iframe src="{0}" width="{1}" height="{2}" border="0" style="border:0px;"></iframe>';
+
             // http://v.youku.com/v_show/id_XMjQ3ODQ0MzQwNA==.html
             if($('#module_basic_player').length > 0){
                 var w = $('#playerBox').width();
                 var h = $('#playerBox').height() - 50;
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $('#module_basic_player').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+                $('#module_basic_player').html(String.format(iframeTpl, iframeSrc, w, h));
             }else{
                 //嵌入式视频1
                 var flagVideo = $('embed').each(function(i, v){
@@ -482,7 +484,7 @@ var GmUtils = (function () {
                             var h = $this.height() - 50;
                             var youkuUrl = String.format('http://v.youku.com/v_show/id_{0}.html', match[1]);
                             var iframeSrc = hackHostUrlPrefix + encodeURIComponent(youkuUrl);
-                            $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($this);
+                            $(String.format(iframeTpl, iframeSrc, w, h)).insertAfter($this);
                             $this.remove();
                         }
                     }
@@ -494,7 +496,7 @@ var GmUtils = (function () {
                 var w = $('#flash').width();
                 var h = $('#flash').height();
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($this);
+                $(String.format(iframeTpl, iframeSrc, w, h)).insertAfter($this);
                 $this.remove();
             }
             // http://www.le.com/ptv/vplay/27544900.html?ref=hypdjdt
@@ -502,24 +504,41 @@ var GmUtils = (function () {
                 var w = $('#fla_box').width();
                 var h = $('#fla_box').height();
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $('#fla_box').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+                $('#fla_box').html(String.format(iframeTpl, iframeSrc, w, h));
 
-                $('body').on('click', '.juji_grid a.j_jujiGrid', function() {
-                    //27589627
+                $('body').on('click', '.juji_cntBox a', function() {
                     var $this = $(this);
-                    if($this.attr('href') == 'javascript:;'){
-                        if($this.data('vid') != null && $this.data('vid').length > 0){
-                            location.href = String.format('http://www.le.com/ptv/vplay/{0}.html', $this.data('vid'));
+                    if($this.attr('href').indexOf('javascript:')>-1){
+                        if($this.data('vid') != null && (''+$this.data('vid')).length > 0){
+                            window.location.href = String.format('http://www.le.com/ptv/vplay/{0}.html', $this.data('vid'));
                         }
                     }
                 });
+                var func = null;
+                func = function() {
+                    if($('.juji_cntBox a').length > 0){
+                        $('.juji_cntBox a').each(function(i, v){
+                            var $this = $(v);
+                            if($this.attr('href').indexOf('javascript:')>-1){
+                                if($this.data('vid') != null && (''+$this.data('vid')).length > 0){
+                                    var jump = String.format('http://www.le.com/ptv/vplay/{0}.html', $this.data('vid'));
+                                    $this.attr('href', jump).attr('onclick', String.format('location.href="{0}"', jump));
+                                }
+                            }
+                        });
+                    } else {
+                        //setTimeout(func, 1000);
+                    }
+                    setTimeout(func, 1000);
+                };
+                func();
             }
             // https://v.qq.com/x/cover/pbju53ju4kwt7x7.html
             if($('#tenvideo_player').length > 0){
                 var w = $('#tenvideo_player').width();
                 var h = $('#tenvideo_player').height();
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $('#tenvideo_player').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+                $('#tenvideo_player').html(String.format(iframeTpl, iframeSrc, w, h));
                 $('body').on('click', '#video_scroll_wrap  a', function() {
                     var $this = $(this);
                     if($this.attr('href') != null && $this.attr('href').indexOf('/x/cover') > -1){
@@ -532,14 +551,14 @@ var GmUtils = (function () {
                 var w = $('#player').width();
                 var h = $('#player').height();
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $('#player').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+                $('#player').html(String.format(iframeTpl, iframeSrc, w, h));
             }
             // http://www.mgtv.com/b/292031/3789569.html
             if($('#mgtv-player-wrap').length > 0){
                 var w = $('#hunantv-player-1').width();
                 var h = $('#hunantv-player-1').height();
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $('#mgtv-player-wrap').html(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h));
+                $('#mgtv-player-wrap').html(String.format(iframeTpl, iframeSrc, w, h));
             }
             // http://tv.sohu.com/20170131/n479749681.shtml
             if($('#sohuplayer').length > 0){
@@ -548,7 +567,7 @@ var GmUtils = (function () {
                 var w = $('#player').width();
                 var h = $('#player').height() + $dmbar.height();
                 var iframeSrc = hackHostUrlPrefix + encodeURIComponent(location.href);
-                $(String.format('<iframe src="{0}" border="0" width="{1}" height="{2}"></iframe>', iframeSrc, w, h)).insertAfter($player);
+                $(String.format(iframeTpl, iframeSrc, w, h)).insertAfter($player);
                 $player.remove();
                 $dmbar.remove();
                 $('#menu .list_juji_tj').remove();
