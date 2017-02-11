@@ -2,14 +2,14 @@
 // @name               MyTools：我的私人工具集
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
-// @namespace          http://www.guqiankun.com/
+// @namespace          https://greasyfork.org/scripts/10453-mytools
 // @homepageURL        https://greasyfork.org/scripts/10453-mytools
-// @version            1.3.32
+// @version            1.3.33
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），默认快捷键：ALT + M
-// @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向、全网主流视频网站VIP破解（免广告），默認快捷鍵：ALT + M
+// @description:zh-TW  整合常用功能，減少插件數量：DirectGoogle、百度音樂盒去廣告、豆瓣補全下載鏈接、網頁右鍵解鎖、購物黨比價工具、解決百度雲大文件下載限制、知乎界面美化、知乎真實鏈接地址重定向、全網主流視頻網站VIP破解（免廣告），默認快捷鍵：ALT + M
 // @author             JerryXia
-// @icon               https://gravatar.proxy.ustclug.org/avatar/3320138fe4724dbf2b3f8728ca264a32?s=48&r=G&d=
+// @icon               http://tampermonkey.net/favicon.ico
 // @license            The MIT License (MIT); http://opensource.org/licenses/MIT
 // @match              *://*/*
 // @include            /^https?\:\/\/(www|news|maps|docs|cse|encrypted)\.google\./
@@ -20,7 +20,6 @@
 // @exclude            http://127.0.0.1*
 // @exclude            http://www.jxhld.gov.cn/*
 // @exclude            http://bbs.htpc1.com/*
-// @exclude            http://blog.guqiankun.com/*
 // @exclude            *://exmail.qq.com/*
 // @exclude            *://cas.edu.sh.cn/*
 // @exclude            *://outlook.live.com/*
