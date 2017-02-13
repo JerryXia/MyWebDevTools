@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.41
+// @version            1.3.42
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -344,483 +344,404 @@ var GmUtils = (function () {
             }
             $('#info').append(link);
         }
-        if(vm.enabledDouBanDownload){
+        if(vm.enabledDouBanDownload && location.href.indexOf('//movie.douban.com/subject')>-1){
             var aside_html = "";
-aside_html += '<div class="c-aside">';
-aside_html += '<h2><i class="">四字标题</i>· · · · · · </h2>';
-aside_html += '<div class="c-aside-body" style="padding: 0 18px;">';
-aside_html += '<ul class="bs">';
-aside_html += '</ul>';
-aside_html += '</div>';
-aside_html += '</div>';
-var imdb_html = "";
-imdb_html += '<div class="rating_wrap clearbox rating_imdb" rel="v:rating" style="padding-top: 0;">';
-imdb_html += '<div class="rating_logo">IMDB 评分</div>';
-imdb_html += '<div class="rating_self clearfix" typeof="v:Rating">';
-imdb_html += '<strong class="ll rating_num" property="v:average">0</strong>';
-imdb_html += '<span property="v:best" content="10.0"></span>';
-imdb_html += '<div class="rating_right ">';
-imdb_html += '<div class="ll"></div>';
-imdb_html += '<div class="rating_sum">';
-imdb_html += '<a href="collections" class="rating_people"><span property="v:votes">0</span>人评价</a>';
-imdb_html += '</div>';
-imdb_html += '</div>';
-imdb_html += '</div>';
-imdb_html += '</div>';
-var c_css = '';
-c_css += ".c-aside {";
-c_css += "margin-bottom: 30px;";
-c_css += "}";
-c_css += ".c-aside-body {";
-c_css += "*letter-spacing: normal;";
-c_css += "}";
-c_css += ".c-aside-body a {";
-c_css += "color: #37A;";
-c_css += "width: 65px;";
-c_css += "text-align: center;";
-c_css += "letter-spacing: normal;";
-c_css += "margin: 0 8px 8px 0;";
-c_css += "padding: 0 8px;";
-c_css += "display: inline-block;";
-c_css += "border-radius: 6px;";
-c_css += "}";
-c_css += ".c-aside-body a:link,";
-c_css += ".c-aside-body a:visited {";
-c_css += "background-color: #f5f5f5;";
-c_css += "color: #37A;";
-c_css += "}";
-c_css += ".c-aside-body a:hover,";
-c_css += ".c-aside-body a:active {";
-c_css += "background-color: #e8e8e8;";
-c_css += "color: #37A;";
-c_css += "}";
-c_css += ".c-aside-body a.disabled {";
-c_css += "text-decoration: line-through;";
-c_css += "}";
-c_css += ".c-aside-body a.available {";
-c_css += "color: #006363;";
-c_css += "background-color: #5ccccc;";
-c_css += "}";
-c_css += ".c-aside-body a.available:hover,";
-c_css += ".c-aside-body a.available:active {";
-c_css += "background-color: #33cccc;";
-c_css += "}";
-c_css += ".c-aside-body a.sites_r0 {";
-c_css += "text-decoration: line-through;";
-c_css += "}";
-c_css += "#interest_sectl .rating_imdb {";
-c_css += "padding-bottom: 0;";
-c_css += "border-bottom: 1px solid #eaeaea;";
-c_css += "}";
-c_css += "#interest_sectl .rating_wrap {";
-c_css += "padding-top: 15px;";
-c_css += "}";
-c_css += "#interest_sectl .rating_more {";
-c_css += "position: relative;";
-c_css += "padding: 15px 0;";
-c_css += "border-top: 1px solid #eaeaea;";
-c_css += "color: #9b9b9b;";
-c_css += "margin: 0;";
-c_css += "}";
-c_css += "#interest_sectl .rating_more a {";
-c_css += "left: 80px;";
-c_css += "position: absolute;";
-c_css += "}";
-c_css += "#interest_sectl .rating_more .titleOverviewSprite {";
-c_css += "background: url('https://coding.net/u/Changhw/p/MyDoubanMovieHelper/git/raw/master/title_overview_sprite.png') no-repeat;";
-c_css += "display: inline-block;";
-c_css += "vertical-align: middle;";
-c_css += "}";
-c_css += "#interest_sectl .rating_more .popularityImageUp {";
-c_css += "background-position: -14px -478px;";
-c_css += "height: 8px;";
-c_css += "width: 8px";
-c_css += "}";
-c_css += "#interest_sectl .rating_more .popularityImageDown {";
-c_css += "background-position: -34px -478px;";
-c_css += "height: 8px;";
-c_css += "width: 8px;";
-c_css += "}";
-c_css += "#interest_sectl .rating_more .popularityUpOrFlat {";
-c_css += "color: #83C40B";
-c_css += "}";
-c_css += "#interest_sectl .rating_more .popularityDown {";
-c_css += "color: #930E02";
-c_css += "}";
-c_css += "#dale_movie_subject_top_right,#dale_movie_subject_top_right,#dale_movie_subject_top_midle,#dale_movie_subject_middle_right,#dale_movie_subject_bottom_super_banner,#footer,.qrcode-app,.top-nav-doubanapp,.extra,div.gray_ad,p.pl,div.ticket{display: none;}";
-GM_addStyle(c_css);
-$(function() {
-    function getDoc(url, callback) {
-        GM_xmlhttpRequest({
-            method: 'GET',
-            url: url,
-            headers: {
-                'Content-type': null
-            },
-            onload: function(response) {
-                var doc = '';
-                if (response.status == 200) {
-                    doc = new DOMParser().parseFromString(response.responseText, 'text/html');
-                    if (doc === undefined) {
-                        doc = document.implementation.createHTMLDocument("");
-                        doc.querySelector('html').innerHTML = responseText;
+            aside_html += '<div class="c-aside">';
+            aside_html += '<h2><i class="">四字标题</i>· · · · · · </h2>';
+            aside_html += '<div class="c-aside-body" style="padding: 0 18px;">';
+            aside_html += '<ul class="bs">';
+            aside_html += '</ul>';
+            aside_html += '</div>';
+            aside_html += '</div>';
+
+            var imdb_html = "";
+            imdb_html += '<div class="rating_wrap clearbox rating_imdb" rel="v:rating" style="padding-top: 0;">';
+            imdb_html += '<div class="rating_logo">IMDB 评分</div>';
+            imdb_html += '<div class="rating_self clearfix" typeof="v:Rating">';
+            imdb_html += '<strong class="ll rating_num" property="v:average">0</strong>';
+            imdb_html += '<span property="v:best" content="10.0"></span>';
+            imdb_html += '<div class="rating_right ">';
+            imdb_html += '<div class="ll"></div>';
+            imdb_html += '<div class="rating_sum">';
+            imdb_html += '<a href="collections" class="rating_people"><span property="v:votes">0</span>人评价</a>';
+            imdb_html += '</div>';
+            imdb_html += '</div>';
+            imdb_html += '</div>';
+            imdb_html += '</div>';
+            var c_css = ".c-aside{margin-bottom:30px}.c-aside-body{*letter-spacing:normal}.c-aside-body a{color:#37A;width:65px;text-align:center;letter-spacing:normal;margin:0 8px 8px 0;padding:0 8px;display:inline-block;border-radius:6px}.c-aside-body a:link,.c-aside-body a:visited{background-color:#f5f5f5;color:#37A}.c-aside-body a:hover,.c-aside-body a:active{background-color:#e8e8e8;color:#37A}.c-aside-body a.disabled{text-decoration:line-through}.c-aside-body a.available{color:#006363;background-color:#5ccccc}.c-aside-body a.available:hover,.c-aside-body a.available:active{background-color:#3cc}.c-aside-body a.sites_r0{text-decoration:line-through}#interest_sectl .rating_imdb{padding-bottom:0;border-bottom:1px solid #eaeaea}#interest_sectl .rating_wrap{padding-top:15px}#interest_sectl .rating_more{position:relative;padding:15px 0;border-top:1px solid #eaeaea;color:#9b9b9b;margin:0}#interest_sectl .rating_more a{left:80px;position:absolute}#interest_sectl .rating_more .titleOverviewSprite{background:url('https://cdn.guqiankun.com/img/201702/20170213143823398995.png') no-repeat;display:inline-block;vertical-align:middle}#interest_sectl .rating_more .popularityImageUp{background-position:-14px -478px;height:8px;width:8px}#interest_sectl .rating_more .popularityImageDown{background-position:-34px -478px;height:8px;width:8px}#interest_sectl .rating_more .popularityUpOrFlat{color:#83C40B}#interest_sectl .rating_more .popularityDown{color:#930E02}#dale_movie_subject_top_right,#dale_movie_subject_top_right,#dale_movie_subject_top_midle,#dale_movie_subject_middle_right,#dale_movie_subject_bottom_super_banner,#footer,.qrcode-app,.top-nav-doubanapp,.extra,div.gray_ad,p.pl,div.ticket{display:none}";
+            GM_addStyle(c_css);
+            $(function() {
+                function getDoc(url, callback) {
+                    GM_xmlhttpRequest({
+                        method: 'GET',
+                        url: url,
+                        headers: {
+                            'Content-type': null
+                        },
+                        onload: function(response) {
+                            var doc = '';
+                            if (response.status == 200) {
+                                doc = new DOMParser().parseFromString(response.responseText, 'text/html');
+                                if (doc === undefined) {
+                                    doc = document.implementation.createHTMLDocument("");
+                                    doc.querySelector('html').innerHTML = responseText;
+                                }
+                            }
+                            callback(doc, response.finalUrl);
+                        }
+                    });
+                }
+
+                function postDoc(url, callback, data) {
+                    GM_xmlhttpRequest({
+                        anonymous: true,
+                        method: 'POST',
+                        url: url,
+                        headers: {
+                            'Content-type': 'application/x-www-form-urlencoded'
+                        },
+                        data: data,
+                        onload: function(response) {
+                            callback(response.responseText, response.finalUrl);
+                        }
+                    });
+                }
+
+                function getJSON(url, callback) {
+                    GM_xmlhttpRequest({
+                        method: 'GET',
+                        url: url,
+                        headers: {
+                            "Accept": "application/json"
+                        },
+                        onload: function(response) {
+                            if (response.status >= 200 && response.status < 400) {
+                                callback(JSON.parse(response.responseText), url);
+                            } else {}
+                        }
+                    });
+                }
+
+                function parseURL(url) {
+                    var a = document.createElement('a');
+                    a.href = url;
+                    return {
+                        source: url,
+                        protocol: a.protocol.replace(':', ''),
+                        host: a.hostname,
+                        port: a.port,
+                        query: a.search,
+                        params: (function() {
+                            var ret = {},
+                                seg = a.search.replace(/^\?/, '').split('&'),
+                                len = seg.length,
+                                i = 0,
+                                s;
+                            for (; i < len; i++) {
+                                if (!seg[i]) {
+                                    continue;
+                                }
+                                s = seg[i].split('=');
+                                ret[s[0]] = s[1];
+                            }
+                            return ret;
+                        })(),
+                        file: (a.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
+                        hash: a.hash.replace('#', ''),
+                        path: a.pathname.replace(/^([^\/])/, '/$1'),
+                        relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
+                        segments: a.pathname.replace(/^\//, '').split('/')
+                    };
+                }
+                var site_online = $(aside_html);
+                site_online.addClass("site_online");
+                site_online.find("div.c-aside-body").addClass("site-online-body");
+                site_online.find("h2 i").text("在线资源");
+                $("#content div.tags").before(site_online);
+
+                function update_site_online_sites(title, en) {
+                    if (en) {} else {
+                        var site_online_sites = {
+                            "f4yy": "http://f4yy.com/index.php?m=vod-search-pg-1-wd-" + encodeURIComponent(title),
+                            "电影6080": "http://www.6080.tv/book/search?action=search&t=8&tag=" + title,
+                            "Bilibili": "http://search.bilibili.com/all?keyword=" + title,
+                            "4K吧": "http://www.kkkkba.com/index.php?s=vod-search-wd-" + title + ".html",
+                            "AcFun": "http://www.acfun.cn/search/#query=" + title,
+                            "搜库": "http://www.soku.com/search_video/q_" + title
+                        };
+                        var sites_playBtn = $("div.gray_ad a.playBtn");
+                        for (var i = 0, n;
+                            (n = sites_playBtn[i]); i++) {
+                            var t = $(n).text().replace(/\s/g, "").replace("视频", "");
+                            var l = $(n).attr("href");
+                            if (l == "javascript: void 0;") {
+                                continue;
+                            }
+                            l = parseURL(l).params['url'];
+                            l = decodeURIComponent(l);
+                            l = "http://www.sfsft.com/admin.php?url=" + l;
+                            site_online_sites[t] = l;
+                        }
+                    }
+                    for (var name in site_online_sites) {
+                        link = site_online_sites[name];
+                        link_parsed = parseURL(link);
+                        link = $("<a></a>").attr("href", link);
+                        link.attr("data-host", link_parsed.host);
+                        link.attr("target", "_blank").attr("rel", "nofollow");
+                        if (link_parsed.host === 'www.sfsft.com' || link_parsed.host === 'search.bilibili.com') {
+                            link.addClass('available');
+                        }
+                        link.html(name);
+                        $("#content div.site-online-body ul").append(link);
                     }
                 }
-                callback(doc, response.finalUrl);
-            }
-        });
-    }
+                var site_offline = $(aside_html);
+                site_offline.addClass("name-offline");
+                site_offline.find("div.c-aside-body").addClass("site-offline-body");
+                site_offline.find("h2 i").text("离线资源");
+                $("#content div.tags").before(site_offline);
 
-    function postDoc(url, callback, data) {
-        GM_xmlhttpRequest({
-            anonymous: true,
-            method: 'POST',
-            url: url,
-            headers: {
-                'Content-type': 'application/x-www-form-urlencoded'
-            },
-            data: data,
-            onload: function(response) {
-                callback(response.responseText, response.finalUrl);
-            }
-        });
-    }
-
-    function getJSON(url, callback) {
-        GM_xmlhttpRequest({
-            method: 'GET',
-            url: url,
-            headers: {
-                "Accept": "application/json"
-            },
-            onload: function(response) {
-                if (response.status >= 200 && response.status < 400) {
-                    callback(JSON.parse(response.responseText), url);
-                } else {}
-            }
-        });
-    }
-
-    function parseURL(url) {
-        var a = document.createElement('a');
-        a.href = url;
-        return {
-            source: url,
-            protocol: a.protocol.replace(':', ''),
-            host: a.hostname,
-            port: a.port,
-            query: a.search,
-            params: (function() {
-                var ret = {},
-                    seg = a.search.replace(/^\?/, '').split('&'),
-                    len = seg.length,
-                    i = 0,
-                    s;
-                for (; i < len; i++) {
-                    if (!seg[i]) {
-                        continue;
+                function update_site_offline_sites(title, en) {
+                    if (en) {
+                        var site_offline_sites = {
+                            "海盗湾": "http://thepiratebay.ee/s/?q=" + title,
+                            "kickass": "https://katcr.co/new/torrents-search.php?" +
+                                "c69=1&c80=1&c79=1&c148=1&c149=1&c81=1&c78=1&c150=1&c71=1&c74=1&cat=0" +
+                                "&incldead=0&freeleech=0&inclexternal=0&lang=0&search=" +
+                                title,
+                            "rarbg": "https://rarbg.to/torrents.php?search=" + title,
+                            "飘域家园": "http://bbs.homefei.net/searcher.php?keyword=" + title
+                        };
+                    } else {
+                        var site_offline_sites = {
+                            "龙部落": "http://www.lbldy.com/search/" + title,
+                            "51下片": "http://www.51xiapian.com/search.php?submit=%E6%90%9C%E7%B4%A2&searchword=" + title,
+                            "高清网": "http://gaoqing.la/?s=" + title,
+                            "高清控": "http://www.gaoqingkong.com/?s=" + title,
+                            "BT天堂": "http://www.bttt.la/s.php?q=" + title + "&sitesearch=www.bttt.la&domains=bttt.la&hl=zh-CN&ie=UTF-8&oe=UTF-8",
+                            "BT吧": "http://www.btba.com.cn/search?keyword=" + title,
+                            "movie吧": "http://www.52movieba.com/?s=" + title,
+                            "动漫花园": "https://share.dmhy.org/topics/list?keyword=" + title,
+                            "电影天堂": "http://zhannei.baidu.com/cse/search?q=" + title + "&s=4523418779164925033",
+                            "飘花资源": "http://so.piaohua.com:8909/plus/search.php?kwtype=0&keyword=" + title,
+                            "BT之家": "http://www.btbtt.la/search-index-keyword-" + title + ".htm",
+                            "我飞网": "http://www.9kkz.com/search.php?keyword=" + title,
+                            "片源网": "http://pianyuan.net/search?q=" + title,
+                            "比特大雄": "http://www.btdx8.com/?s=" + title,
+                            "RARBT": "http://www.rarbt.com/index.php/search/index.html?search=" + title,
+                            "CILI001": "http://cili17.com/?topic_title3=" + title,
+                            "哇呱影视": "http://www.gagays.com/movie/search?req%5Bkw%5D=" + title,
+                            "天天美剧": "http://www.ttmeiju.com/index.php/search/index.html?keyword=" + title + "&range=0",
+                            "深影论坛": "http://zhannei.baidu.com/cse/search?q=" + title + "&click=1&s=10886843873236087874&nsid="
+                        };
                     }
-                    s = seg[i].split('=');
-                    ret[s[0]] = s[1];
-                }
-                return ret;
-            })(),
-            file: (a.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
-            hash: a.hash.replace('#', ''),
-            path: a.pathname.replace(/^([^\/])/, '/$1'),
-            relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
-            segments: a.pathname.replace(/^\//, '').split('/')
-        };
-    }
-    var site_online = $(aside_html);
-    site_online.addClass("site_online");
-    site_online.find("div.c-aside-body").addClass("site-online-body");
-    site_online.find("h2 i").text("在线资源");
-    $("#content div.tags").before(site_online);
-
-    function update_site_online_sites(title, en) {
-        if (en) {} else {
-            var site_online_sites = {
-                "f4yy": "http://f4yy.com/index.php?m=vod-search-pg-1-wd-" + encodeURIComponent(title),
-                "电影6080": "http://www.6080.tv/book/search?action=search&t=8&tag=" + title,
-                "Bilibili": "http://search.bilibili.com/all?keyword=" + title,
-                "4K吧": "http://www.kkkkba.com/index.php?s=vod-search-wd-" + title + ".html",
-                "AcFun": "http://www.acfun.cn/search/#query=" + title,
-                "搜库": "http://www.soku.com/search_video/q_" + title
-            };
-            var sites_playBtn = $("div.gray_ad a.playBtn");
-            for (var i = 0, n;
-                (n = sites_playBtn[i]); i++) {
-                var t = $(n).text().replace(/\s/g, "").replace("视频", "");
-                var l = $(n).attr("href");
-                if (l == "javascript: void 0;") {
-                    continue;
-                }
-                l = parseURL(l).params['url'];
-                l = decodeURIComponent(l);
-                l = "http://www.sfsft.com/admin.php?url=" + l;
-                site_online_sites[t] = l;
-            }
-        }
-        for (var name in site_online_sites) {
-            link = site_online_sites[name];
-            link_parsed = parseURL(link);
-            link = $("<a></a>").attr("href", link);
-            link.attr("data-host", link_parsed.host);
-            link.attr("target", "_blank").attr("rel", "nofollow");
-            if (link_parsed.host === 'www.sfsft.com' || link_parsed.host === 'search.bilibili.com') {
-                link.addClass('available');
-            }
-            link.html(name);
-            $("#content div.site-online-body ul").append(link);
-        }
-    }
-    var site_offline = $(aside_html);
-    site_offline.addClass("name-offline");
-    site_offline.find("div.c-aside-body").addClass("site-offline-body");
-    site_offline.find("h2 i").text("离线资源");
-    $("#content div.tags").before(site_offline);
-
-    function update_site_offline_sites(title, en) {
-        if (en) {
-            var site_offline_sites = {
-                "海盗湾": "http://thepiratebay.ee/s/?q=" + title,
-                "kickass": "https://katcr.co/new/torrents-search.php?" +
-                    "c69=1&c80=1&c79=1&c148=1&c149=1&c81=1&c78=1&c150=1&c71=1&c74=1&cat=0" +
-                    "&incldead=0&freeleech=0&inclexternal=0&lang=0&search=" +
-                    title,
-                "rarbg": "https://rarbg.to/torrents.php?search=" + title,
-                "飘域家园": "http://bbs.homefei.net/searcher.php?keyword=" + title
-            };
-        } else {
-            var site_offline_sites = {
-                "龙部落": "http://www.lbldy.com/search/" + title,
-                "51下片": "http://www.51xiapian.com/search.php?submit=%E6%90%9C%E7%B4%A2&searchword=" + title,
-                "高清网": "http://gaoqing.la/?s=" + title,
-                "高清控": "http://www.gaoqingkong.com/?s=" + title,
-                "BT天堂": "http://www.bttt.la/s.php?q=" + title + "&sitesearch=www.bttt.la&domains=bttt.la&hl=zh-CN&ie=UTF-8&oe=UTF-8",
-                "BT吧": "http://www.btba.com.cn/search?keyword=" + title,
-                "movie吧": "http://www.52movieba.com/?s=" + title,
-                "动漫花园": "https://share.dmhy.org/topics/list?keyword=" + title,
-                "电影天堂": "http://zhannei.baidu.com/cse/search?q=" + title + "&s=4523418779164925033",
-                "飘花资源": "http://so.piaohua.com:8909/plus/search.php?kwtype=0&keyword=" + title,
-                "BT之家": "http://www.btbtt.la/search-index-keyword-" + title + ".htm",
-                "我飞网": "http://www.9kkz.com/search.php?keyword=" + title,
-                "片源网": "http://pianyuan.net/search?q=" + title,
-                "比特大雄": "http://www.btdx8.com/?s=" + title,
-                "RARBT": "http://www.rarbt.com/index.php/search/index.html?search=" + title,
-                "CILI001": "http://cili17.com/?topic_title3=" + title,
-                "哇呱影视": "http://www.gagays.com/movie/search?req%5Bkw%5D=" + title,
-                "天天美剧": "http://www.ttmeiju.com/index.php/search/index.html?keyword=" + title + "&range=0",
-                "深影论坛": "http://zhannei.baidu.com/cse/search?q=" + title + "&click=1&s=10886843873236087874&nsid="
-            };
-        }
-        for (var name in site_offline_sites) {
-            link = site_offline_sites[name];
-            link_parsed = parseURL(link);
-            link = $("<a></a>").attr("href", link);
-            link.attr("data-host", link_parsed.host);
-            link.attr("target", "_blank").attr("rel", "nofollow");
-            link.html(name);
-            $("#content div.site-offline-body ul").append(link);
-        }
-    }
-    var site_sub = $(aside_html);
-    site_sub.addClass("name-offline");
-    site_sub.find("div.c-aside-body").addClass("site-sub-body");
-    site_sub.find("h2 i").text("字幕资源");
-    $("#content div.related-info").after(site_sub);
-
-    function update_site_sub_sites(title, en) {
-        if (en) {
-            var site_offline_sites = {
-                "射手伪": "http://assrt.net/sub/?searchword=" + title,
-            };
-        } else {
-            var site_offline_sites = {
-                "字幕库": "http://www.zimuku.net/search?q=" + title,
-                "字幕组": "http://www.zimuzu.tv/search/index?keyword=" + title,
-                "sub HD": "http://subhd.com/search/" + title,
-                "sub OM": "http://www.subom.net/search/" + title,
-                "163字幕": "http://www.163sub.com/Search?id=" + title,
-                "第三楼字幕": "http://zhannei.baidu.com/cse/search?click=1&s=8073048380622477318&nsid=&q=" + title,
-                "电波字幕": "http://dbfansub.com/?s=" + title,
-            };
-        }
-        for (var name in site_offline_sites) {
-            link = site_offline_sites[name];
-            link_parsed = parseURL(link);
-            link = $("<a></a>").attr("href", link);
-            link.attr("data-host", link_parsed.host);
-            link.attr("target", "_blank").attr("rel", "nofollow");
-            link.html(name);
-            $("#content div.site-sub-body ul").append(link);
-        }
-    }
-    var title = title_sec = $("#content > h1 > span")[0].textContent.split(" ");
-    title = title.shift();
-    title_sec = title_sec.join(" ").trim();
-    var title_en = "";
-    update_site_online_sites(title);
-    update_site_offline_sites(title);
-    update_site_sub_sites(title);
-    (function() {
-        var imdb = $("div#info a[href^='http://www.imdb.com/title/tt']");
-        if (imdb) {
-            var imdb_href = imdb.attr('href');
-            imdb_id = imdb.text();
-            if (imdb && imdb_id.startsWith('tt')) {
-                imdb_id = imdb_id.slice(2);
-            } else {
-                imdb_id = "";
-            }
-            getDoc(imdb_href, function(doc, url) {
-                if ($(doc).find("div.notEnoughRatings").length) {
-                    return;
-                }
-                title_imdb = $(doc).attr('title');
-                title_imdb = title_imdb.split(" (")[0];
-                update_site_offline_sites(title_imdb, true);
-                update_site_sub_sites(title_imdb, true);
-                var rating_douban = $("#interest_sectl .rating_wrap").addClass("rating_douban");
-                var rating_douban_ratingValue = $("#interest_sectl .rating_douban a.rating_people span[property^=v]").text();
-                rating_douban_ratingValue = (rating_douban_ratingValue + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
-                $("#interest_sectl .rating_douban a.rating_people span[property^=v]").text(rating_douban_ratingValue);
-                $("#interest_sectl").prepend($(imdb_html));
-                var rating_imdb = $("#interest_sectl .rating_imdb");
-                $("#interest_sectl .rating_imdb a.rating_people").attr("href", imdb_href + "/" + "ratings?ref_=tt_ov_rt");
-                var ratingValue = $('span[itemprop=ratingValue]', doc).text();
-                $("#interest_sectl .rating_imdb strong.rating_num").text(ratingValue);
-                var starValue = ratingValue / 2;
-                starValue = ((starValue % 1) > 0.5) ? Math.floor(starValue) + 0.5 : Math.floor(starValue);
-                starValue *= 10;
-                starValue = "bigstar" + starValue;
-                $("#interest_sectl .rating_imdb div.rating_right div.ll").addClass(starValue);
-                var ratingCount = $('span[itemprop=ratingCount]', doc).text();
-                $("#interest_sectl .rating_imdb a.rating_people span[property^=v]").text(ratingCount);
-                $("#interest_sectl").append($("<div></div>").addClass("rating_more"));
-                var rating_more = $("#interest_sectl .rating_more");
-                var titleReviewBarItem = $('div.titleReviewBarItem', doc);
-                var Metasocre = "";
-                for (var i = 0, n;
-                    (n = titleReviewBarItem[i]); i++) {
-                    var t = $(n).text();
-                    if (t.indexOf("Metascore") != -1) {
-                        var Metascore = $(n).find("a[href^=criticreviews] span").text();
-                        rating_more.html(rating_more.html() + "Metasocre" + $("<a></a>").attr("href", imdb_href + "/" + "criticreviews?ref_=tt_ov_rt").text(Metascore)[0].outerHTML + "<br>");
-                    } else if (t.indexOf("Reviews") != -1) {} else if (t.indexOf("Popularity") != -1) {
-                        var Popularity = $(n).find("span.subText").html();
-                        rating_more.html(rating_more.html() + "流行度&nbsp;&nbsp;" + Popularity + "<br>");
+                    for (var name in site_offline_sites) {
+                        link = site_offline_sites[name];
+                        link_parsed = parseURL(link);
+                        link = $("<a></a>").attr("href", link);
+                        link.attr("data-host", link_parsed.host);
+                        link.attr("target", "_blank").attr("rel", "nofollow");
+                        link.html(name);
+                        $("#content div.site-offline-body ul").append(link);
                     }
                 }
-            });
-        }
-    })();
-    (function() {
-        var site = $("div.aside a[data-host$='f4yy.com']");
-        if (site) {
-            var site_href = site.attr("href");
-            getDoc(site_href, function(doc) {
-                var lists = $("#contents li", doc);
-                var links = [];
-                for (var i = 0; i < lists.length; i++) {
-                    var l = $(lists[i]);
-                    links.push('http://f4yy.com' + l.find("a[href^='/vodhtml']").attr("href"));
-                }
-                if (links.length == 0) {
-                    site.addClass("disabled");
-                    return;
-                } else if (links.length == 1) {
-                    site.attr('href', links[0]);
-                    site.addClass('available');
-                }
-            });
-        }
-    })();
-    (function() {
-        var site = $("div.aside a[data-host$='lbldy.com']");
-        if (site) {
-            var site_href = site.attr("href");
-            getDoc(site_href, function(doc) {
-                var lists = $("div.col div.postlist", doc);
-                var links = [];
-                for (var i = 0; i < lists.length; i++) {
-                    var l = $(lists[i]);
-                    l = l.find("a");
-                    links.push(l.attr("href"));
-                }
-                if (links.length == 0) {
-                    site.addClass("disabled");
-                    return;
-                } else if (links.length == 1) {
-                    site.attr('href', links[0]);
-                    site.addClass('available');
-                }
-            });
-        }
-    })();
-    (function() {
-        var site = $("div.aside a[data-host$='www.6080.tv']");
-        if (site) {
-            var site_href = site.attr("href");
-            getDoc(site_href, function(doc) {
-                var lists = $("div.bd ul.pic li", doc);
-                var links = [];
-                for (var i = 0; i < lists.length; i++) {
-                    var l = $(lists[i]);
-                    if (l.find("span > span").text().indexOf(title) != -1) {
-                        links.push('http://www.6080.tv' + l.find("a[href^='/note']").attr("href"));
+                var site_sub = $(aside_html);
+                site_sub.addClass("name-offline");
+                site_sub.find("div.c-aside-body").addClass("site-sub-body");
+                site_sub.find("h2 i").text("字幕资源");
+                $("#content div.related-info").after(site_sub);
+
+                function update_site_sub_sites(title, en) {
+                    if (en) {
+                        var site_offline_sites = {
+                            "射手伪": "http://assrt.net/sub/?searchword=" + title,
+                        };
+                    } else {
+                        var site_offline_sites = {
+                            "字幕库": "http://www.zimuku.net/search?q=" + title,
+                            "字幕组": "http://www.zimuzu.tv/search/index?keyword=" + title,
+                            "sub HD": "http://subhd.com/search/" + title,
+                            "sub OM": "http://www.subom.net/search/" + title,
+                            "163字幕": "http://www.163sub.com/Search?id=" + title,
+                            "第三楼字幕": "http://zhannei.baidu.com/cse/search?click=1&s=8073048380622477318&nsid=&q=" + title,
+                            "电波字幕": "http://dbfansub.com/?s=" + title,
+                        };
+                    }
+                    for (var name in site_offline_sites) {
+                        link = site_offline_sites[name];
+                        link_parsed = parseURL(link);
+                        link = $("<a></a>").attr("href", link);
+                        link.attr("data-host", link_parsed.host);
+                        link.attr("target", "_blank").attr("rel", "nofollow");
+                        link.html(name);
+                        $("#content div.site-sub-body ul").append(link);
                     }
                 }
-                if (links.length == 0) {
-                    site.addClass("disabled");
-                    return;
-                } else if (links.length == 1) {
-                    site.attr('href', links[0]);
-                    site.addClass('available');
-                }
+                var title = title_sec = $("#content > h1 > span")[0].textContent.split(" ");
+                title = title.shift();
+                title_sec = title_sec.join(" ").trim();
+                var title_en = "";
+                update_site_online_sites(title);
+                update_site_offline_sites(title);
+                update_site_sub_sites(title);
+                (function() {
+                    var imdb = $("div#info a[href^='http://www.imdb.com/title/tt']");
+                    if (imdb) {
+                        var imdb_href = imdb.attr('href');
+                        imdb_id = imdb.text();
+                        if (imdb && imdb_id.startsWith('tt')) {
+                            imdb_id = imdb_id.slice(2);
+                        } else {
+                            imdb_id = "";
+                        }
+                        getDoc(imdb_href, function(doc, url) {
+                            if ($(doc).find("div.notEnoughRatings").length) {
+                                return;
+                            }
+                            title_imdb = $(doc).attr('title');
+                            title_imdb = title_imdb.split(" (")[0];
+                            update_site_offline_sites(title_imdb, true);
+                            update_site_sub_sites(title_imdb, true);
+                            var rating_douban = $("#interest_sectl .rating_wrap").addClass("rating_douban");
+                            var rating_douban_ratingValue = $("#interest_sectl .rating_douban a.rating_people span[property^=v]").text();
+                            rating_douban_ratingValue = (rating_douban_ratingValue + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+                            $("#interest_sectl .rating_douban a.rating_people span[property^=v]").text(rating_douban_ratingValue);
+                            $("#interest_sectl").prepend($(imdb_html));
+                            var rating_imdb = $("#interest_sectl .rating_imdb");
+                            $("#interest_sectl .rating_imdb a.rating_people").attr("href", imdb_href + "/" + "ratings?ref_=tt_ov_rt");
+                            var ratingValue = $('span[itemprop=ratingValue]', doc).text();
+                            $("#interest_sectl .rating_imdb strong.rating_num").text(ratingValue);
+                            var starValue = ratingValue / 2;
+                            starValue = ((starValue % 1) > 0.5) ? Math.floor(starValue) + 0.5 : Math.floor(starValue);
+                            starValue *= 10;
+                            starValue = "bigstar" + starValue;
+                            $("#interest_sectl .rating_imdb div.rating_right div.ll").addClass(starValue);
+                            var ratingCount = $('span[itemprop=ratingCount]', doc).text();
+                            $("#interest_sectl .rating_imdb a.rating_people span[property^=v]").text(ratingCount);
+                            $("#interest_sectl").append($("<div></div>").addClass("rating_more"));
+                            var rating_more = $("#interest_sectl .rating_more");
+                            var titleReviewBarItem = $('div.titleReviewBarItem', doc);
+                            var Metasocre = "";
+                            for (var i = 0, n;
+                                (n = titleReviewBarItem[i]); i++) {
+                                var t = $(n).text();
+                                if (t.indexOf("Metascore") != -1) {
+                                    var Metascore = $(n).find("a[href^=criticreviews] span").text();
+                                    rating_more.html(rating_more.html() + "Metasocre" + $("<a></a>").attr("href", imdb_href + "/" + "criticreviews?ref_=tt_ov_rt").text(Metascore)[0].outerHTML + "<br>");
+                                } else if (t.indexOf("Reviews") != -1) {} else if (t.indexOf("Popularity") != -1) {
+                                    var Popularity = $(n).find("span.subText").html();
+                                    rating_more.html(rating_more.html() + "流行度&nbsp;&nbsp;" + Popularity + "<br>");
+                                }
+                            }
+                        });
+                    }
+                })();
+                (function() {
+                    var site = $("div.aside a[data-host$='f4yy.com']");
+                    if (site) {
+                        var site_href = site.attr("href");
+                        getDoc(site_href, function(doc) {
+                            var lists = $("#contents li", doc);
+                            var links = [];
+                            for (var i = 0; i < lists.length; i++) {
+                                var l = $(lists[i]);
+                                links.push('http://f4yy.com' + l.find("a[href^='/vodhtml']").attr("href"));
+                            }
+                            if (links.length == 0) {
+                                site.addClass("disabled");
+                                return;
+                            } else if (links.length == 1) {
+                                site.attr('href', links[0]);
+                                site.addClass('available');
+                            }
+                        });
+                    }
+                })();
+                (function() {
+                    var site = $("div.aside a[data-host$='lbldy.com']");
+                    if (site) {
+                        var site_href = site.attr("href");
+                        getDoc(site_href, function(doc) {
+                            var lists = $("div.col div.postlist", doc);
+                            var links = [];
+                            for (var i = 0; i < lists.length; i++) {
+                                var l = $(lists[i]);
+                                l = l.find("a");
+                                links.push(l.attr("href"));
+                            }
+                            if (links.length == 0) {
+                                site.addClass("disabled");
+                                return;
+                            } else if (links.length == 1) {
+                                site.attr('href', links[0]);
+                                site.addClass('available');
+                            }
+                        });
+                    }
+                })();
+                (function() {
+                    var site = $("div.aside a[data-host$='www.6080.tv']");
+                    if (site) {
+                        var site_href = site.attr("href");
+                        getDoc(site_href, function(doc) {
+                            var lists = $("div.bd ul.pic li", doc);
+                            var links = [];
+                            for (var i = 0; i < lists.length; i++) {
+                                var l = $(lists[i]);
+                                if (l.find("span > span").text().indexOf(title) != -1) {
+                                    links.push('http://www.6080.tv' + l.find("a[href^='/note']").attr("href"));
+                                }
+                            }
+                            if (links.length == 0) {
+                                site.addClass("disabled");
+                                return;
+                            } else if (links.length == 1) {
+                                site.attr('href', links[0]);
+                                site.addClass('available');
+                            }
+                        });
+                    }
+                })();
+                (function() {
+                    if ($("#dale_movie_subject_top_right").length) {
+                        $("#dale_movie_subject_top_right").remove();
+                    }
+                    if ($("#dale_movie_subject_top_right").length) {
+                        $("#dale_movie_subject_top_right").remove();
+                    }
+                    if ($("#dale_movie_subject_top_midle").length) {
+                        $("#dale_movie_subject_top_midle").remove();
+                    }
+                    if ($("#dale_movie_subject_middle_right").length) {
+                        $("#dale_movie_subject_middle_right").remove();
+                    }
+                    if ($("#dale_movie_subject_bottom_super_banner").length) {
+                        $("#dale_movie_subject_bottom_super_banner").remove();
+                    }
+                    if ($("#footer").length) {
+                        $("#footer").remove();
+                    }
+                    if ($(".qrcode-app").length) {
+                        $(".qrcode-app").remove();
+                    }
+                    if ($(".top-nav-doubanapp").length) {
+                        $(".top-nav-doubanapp").remove();
+                    }
+                    if ($(".extra").length) {
+                        $(".extra").remove();
+                    }
+                    if ($("div.gray_ad").length) {
+                        $("div.gray_ad").remove();
+                    }
+                    if ($("p.pl").length) {
+                        $("p.pl").remove();
+                    }
+                    if ($("div.ticket").length) {
+                        $("div.ticket").remove();
+                    }
+                })();
             });
-        }
-    })();
-    (function() {
-        if ($("#dale_movie_subject_top_right").length) {
-            $("#dale_movie_subject_top_right").remove();
-        }
-        if ($("#dale_movie_subject_top_right").length) {
-            $("#dale_movie_subject_top_right").remove();
-        }
-        if ($("#dale_movie_subject_top_midle").length) {
-            $("#dale_movie_subject_top_midle").remove();
-        }
-        if ($("#dale_movie_subject_middle_right").length) {
-            $("#dale_movie_subject_middle_right").remove();
-        }
-        if ($("#dale_movie_subject_bottom_super_banner").length) {
-            $("#dale_movie_subject_bottom_super_banner").remove();
-        }
-        if ($("#footer").length) {
-            $("#footer").remove();
-        }
-        if ($(".qrcode-app").length) {
-            $(".qrcode-app").remove();
-        }
-        if ($(".top-nav-doubanapp").length) {
-            $(".top-nav-doubanapp").remove();
-        }
-        if ($(".extra").length) {
-            $(".extra").remove();
-        }
-        if ($("div.gray_ad").length) {
-            $("div.gray_ad").remove();
-        }
-        if ($("p.pl").length) {
-            $("p.pl").remove();
-        }
-        if ($("div.ticket").length) {
-            $("div.ticket").remove();
-        }
-    })();
-});
         }
 
         if(vm.enabledCopyPage){
