@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.59
+// @version            1.3.60
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -36,6 +36,7 @@
 // @connect            6080.tv
 // @connect            f4yy.com
 // @connect            lbldy.com
+// @connect            jd.com
 // @connect            qiniudn.com
 // @grant              unsafeWindow
 // @grant              GM_log
@@ -96,7 +97,7 @@ var GmUtils = (function () {
             method: 'GET',
             url: 'http://xjthree.qiniudn.com/hm.html?d='+encodeURIComponent(JSON.stringify({ log: d })),
             headers: {
-                Referer: document.referrer || ''
+                Referer: location.href || ''
             },
             onload: function(response) {
                 //
