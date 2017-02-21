@@ -38,6 +38,7 @@
 // @connect            lbldy.com
 // @connect            jd.com
 // @connect            qiniudn.com
+// @connect            *
 // @grant              unsafeWindow
 // @grant              GM_log
 // @grant              GM_addStyle
