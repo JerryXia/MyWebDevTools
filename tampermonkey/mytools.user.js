@@ -43,6 +43,7 @@
 // @connect            taobao.com
 // @connect            tmall.com
 // @connect            47ks.com
+// @connect            aikan-tv.com
 // @grant              unsafeWindow
 // @grant              GM_log
 // @grant              GM_addStyle
@@ -97,7 +98,7 @@ var GmUtils = (function () {
     GmUtils.prototype.DOMAttrModified = function(obj, fn){
         obj.addEventListener("DOMAttrModified", fn, false);
     };
-    GmUtils.prototype.log = function(d){
+    GmUtils.prototype.errlog = function(d){
         GM_xmlhttpRequest({
             method: 'GET',
             url: 'http://xjthree.qiniudn.com/hm.html?d='+encodeURIComponent(JSON.stringify({ log: d })),
@@ -109,6 +110,7 @@ var GmUtils = (function () {
             }
         });
     };
+    GmUtils.prototype.originHttpRequest = GM_xmlhttpRequest;
     return GmUtils;
 })();
 
