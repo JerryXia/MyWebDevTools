@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.70
+// @version            1.3.71
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -38,7 +38,9 @@
 // @connect            6080.tv
 // @connect            f4yy.com
 // @connect            lbldy.com
+// @connect            aaqqs.com
 // @connect            jd.com
+// @connect            jd.hk
 // @connect            2345.com
 // @connect            qiniudn.com
 // @connect            taobao.com
@@ -446,7 +448,7 @@ var GmUtils = (function () {
             imdb_html += '</div>';
             imdb_html += '</div>';
             var c_css = ".c-aside{margin-bottom:30px}.c-aside-body{*letter-spacing:normal}.c-aside-body a{color:#37A;width:65px;text-align:center;letter-spacing:normal;margin:0 8px 8px 0;padding:0 8px;display:inline-block;border-radius:6px}.c-aside-body a:link,.c-aside-body a:visited{background-color:#f5f5f5;color:#37A}.c-aside-body a:hover,.c-aside-body a:active{background-color:#e8e8e8;color:#37A}.c-aside-body a.disabled{text-decoration:line-through}.c-aside-body a.available{color:#006363;background-color:#5ccccc}.c-aside-body a.available:hover,.c-aside-body a.available:active{background-color:#3cc}.c-aside-body a.sites_r0{text-decoration:line-through}#interest_sectl .rating_imdb{padding-bottom:0;border-bottom:1px solid #eaeaea}#interest_sectl .rating_wrap{padding-top:15px}#interest_sectl .rating_more{position:relative;padding:15px 0;border-top:1px solid #eaeaea;color:#9b9b9b;margin:0}#interest_sectl .rating_more a{left:80px;position:absolute}#interest_sectl .rating_more .titleOverviewSprite{background:url('https://cdn.guqiankun.com/img/201702/20170213143823398995.png') no-repeat;display:inline-block;vertical-align:middle}#interest_sectl .rating_more .popularityImageUp{background-position:-14px -478px;height:8px;width:8px}#interest_sectl .rating_more .popularityImageDown{background-position:-34px -478px;height:8px;width:8px}#interest_sectl .rating_more .popularityUpOrFlat{color:#83C40B}#interest_sectl .rating_more .popularityDown{color:#930E02}#dale_movie_subject_top_right,#dale_movie_subject_top_right,#dale_movie_subject_top_midle,#dale_movie_subject_middle_right,#dale_movie_subject_bottom_super_banner,#footer,.qrcode-app,.top-nav-doubanapp,.extra,div.gray_ad,p.pl,div.ticket{display:none}";
-            GM_addStyle(c_css);
+            gmUtils.addStyle(c_css);
             $(function() {
                 function getDoc(url, callback) {
                     GM_xmlhttpRequest({
@@ -583,10 +585,7 @@ var GmUtils = (function () {
                     if (en) {
                         var site_offline_sites = {
                             "海盗湾": "http://thepiratebay.ee/s/?q=" + title,
-                            "kickass": "https://katcr.co/new/torrents-search.php?" +
-                                "c69=1&c80=1&c79=1&c148=1&c149=1&c81=1&c78=1&c150=1&c71=1&c74=1&cat=0" +
-                                "&incldead=0&freeleech=0&inclexternal=0&lang=0&search=" +
-                                title,
+                            "kickass": "https://katcr.co/new/torrents-search.php?c69=1&c80=1&c79=1&c148=1&c149=1&c81=1&c78=1&c150=1&c71=1&c74=1&cat=0&incldead=0&freeleech=0&inclexternal=0&lang=0&search=" + title,
                             "rarbg": "https://rarbg.to/torrents.php?search=" + title,
                             "飘域家园": "http://bbs.homefei.net/searcher.php?keyword=" + title
                         };
