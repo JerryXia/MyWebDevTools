@@ -944,7 +944,7 @@ var GmUtils = (function () {
                 document.location.protocol + '//aikan-tv.com/robots.txt?url='
             ];
             var rdnIndex = Math.floor(Math.random() * hackHostUrlPrefixs.length);
-            var hackHostUrlPrefix = hackHostUrlPrefixs[1];
+            var hackHostUrlPrefix = hackHostUrlPrefixs[rdnIndex];
 
             var iframeTpl = '<iframe src="{0}" width="{1}" height="{2}" border="0" style="border:0px;"></iframe>';
 
