@@ -29,6 +29,7 @@
 // @exclude            *://outlook.live.com/*
 // @exclude            *://bbs.dg2012.com/*
 // @exclude            *://www.sexinsex.net/*
+// @exclude            *://*.1688.com/*
 // @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
 // @require            https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js
 // @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
