@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.85
+// @version            1.3.86
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：DirectGoogle、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -963,17 +963,46 @@ var GmUtils = (function () {
 
         function videoFuck() {
             //("https:" == document.location.protocol)?('https://api.47ks.com/robots.txt?v=') : 'http://p2.api.47ks.com/webcloud/?v=',
-            var hackHostUrlPrefixs = [
-                document.location.protocol + '//api.47ks.com/webcloud/?v=',
-                //document.location.protocol + '//aikan-tv.com/robots.txt?url=',
-                document.location.protocol + '//ckplaer.duapp.com/hai.php?url='
-            ];
-            if(document.location.protocol === 'http:') {
-                hackHostUrlPrefixs.push('http://www.qfhsdq.com/admin.php?url=');
+            var hackHostUrlPrefixs = [];
+            // https sources
+            var config_hackVideoHttpsSources = gmUtils.getVal('config_hackVideoHttpsSources', '');
+            if(config_hackVideoHttpsSources && config_hackVideoHttpsSources.length > 0){
+                try{
+                    var config_hackVideoSourceArr = JSON.parse(config_hackVideoHttpsSources);
+                    for(var i = 0; i < config_hackVideoSourceArr.length; i++){
+                        hackHostUrlPrefixs.push(config_hackVideoSourceArr[i]);
+                    }
+                }catch(vfErr){
+                    //
+                }
+            }else{
+                gmUtils.log('config_hackVideoHttpsSources not exists');
             }
+            if(hackHostUrlPrefixs.length == 0){
+                hackHostUrlPrefixs = [
+                    document.location.protocol + '//api.47ks.com/webcloud/?v=',
+                    //document.location.protocol + '//aikan-tv.com/robots.txt?url=',
+                    document.location.protocol + '//ckplaer.duapp.com/hai.php?url='
+                ];
+            }
+            // http sources
+            var config_hackVideoHttpSources = gmUtils.getVal('config_hackVideoHttpSources', '');
+            if(config_hackVideoHttpSources && config_hackVideoHttpSources.length > 0){
+                try{
+                    var config_hackVideoSourceArr = JSON.parse(config_hackVideoHttpSources);
+                    for(var i = 0; i < config_hackVideoSourceArr.length; i++){
+                        hackHostUrlPrefixs.push(config_hackVideoSourceArr[i]);
+                    }
+                }catch(vfErr){
+                    //
+                }
+            }else{
+                gmUtils.log('config_hackVideoHttpSources not exists');
+            }
+
             var rdnIndex = Math.floor(Math.random() * hackHostUrlPrefixs.length);
             var hackHostUrlPrefix = hackHostUrlPrefixs[rdnIndex];
-            gmUtils.log(hackHostUrlPrefix);
+            gmUtils.log('random videourl:' + hackHostUrlPrefix);
             var iframeTpl = '<iframe src="{0}" width="{1}" height="{2}" border="0" style="border:0px;"></iframe>';
 
             // http://v.youku.com/v_show/id_XMjQ3ODQ0MzQwNA==.html
