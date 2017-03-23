@@ -3,7 +3,7 @@
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.87
+// @version            1.3.88
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：绕过谷歌重定向、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：绕过谷歌重定向、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -31,6 +31,7 @@
 // @exclude            *://www.sexinsex.net/*
 // @exclude            *://*.1688.com/*
 // @exclude            *://outlook.office365.com/*
+// @exclude            *://www.7xiazai.com/*
 // @require            https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js
 // @require            https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js
 // @require            https://cdn.bootcss.com/mustache.js/2.2.1/mustache.min.js
