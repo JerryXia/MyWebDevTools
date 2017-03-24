@@ -1,9 +1,9 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name               MyTools：我的私人工具集
 // @name:zh-CN         MyTools：我的私有工具集
 // @name:zh-TW         MyTools：我的私有工具集
 // @namespace          https://greasyfork.org/users/11804-jerryxia
-// @version            1.3.89
+// @version            1.3.90
 // @author             JerryXia
 // @description        整合常用功能，减少插件数量：绕过谷歌重定向、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
 // @description:zh-CN  整合常用功能，减少插件数量：绕过谷歌重定向、百度音乐盒去广告、豆瓣补全下载链接、网页右键解锁、购物党比价工具、解决百度云大文件下载限制、知乎界面美化、知乎真实链接地址重定向、全网主流视频网站VIP破解（免广告），呼出快捷键：ALT + M
@@ -223,13 +223,13 @@ var GmUtils = (function () {
     function convertUrl2QR(url) {
         url = url || location.href;
         //var imgUrl = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=Q|0&chl=" + encodeURIComponent(url);
-        var favUrl = jQuery("head link[rel*='icon']").attr('href') || '//' + location.hostname + '/favicon.ico';
-        jQuery('#fav'+currentGuid).attr("src", favUrl).show();
-        jQuery('#fav'+currentGuid, '#qr'+currentGuid).bind("error", function(e) {
-            $(e.target).hide();
-        });
         //jQuery('#qr'+currentGuid).attr("src", imgUrl);
         try{
+            var favUrl = jQuery("head link[rel*='icon']").attr('href') || '//' + location.hostname + '/favicon.ico';
+            jQuery('#fav'+currentGuid).attr("src", favUrl).show();
+            jQuery('#fav'+currentGuid, '#qr'+currentGuid).bind("error", function(e) {
+                $(e.target).hide();
+            });
             jQuery('#qr'+currentGuid).qrcode({ width: 200, height: 200, text: url });
         }catch(err){
             gmUtils.log(err);
